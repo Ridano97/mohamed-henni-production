@@ -1,0 +1,262 @@
+/* ============================= */
+/*            NAVBAR             */
+/* ============================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+}
+
+/* ============================= */
+/*        CONTAINER HEADER       */
+/* ============================= */
+
+.navbar-container {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* ============================= */
+/*             LOGO              */
+/* ============================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Fixe la hauteur (px OK), et on évite l’écrasement avec object-fit: contain */
+.logo-img {
+  position: relative;
+  height: 60px;     /* ↑ augmente ici si tu veux encore plus grand (max ~65) */
+  width: 220px;     /* adapte selon ton logo */
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  object-fit: contain;
+}
+
+/* ============================= */
+/*         NAVIGATION DESKTOP    */
+/* ============================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 44px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.nav-links a {
+  color: white;
+  opacity: 0.78;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: width 0.28s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ============================= */
+/*            CTA DESKTOP        */
+/* ============================= */
+
+.cta {
+  flex-shrink: 0;
+  background: white;
+  color: black;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.cta:hover {
+  background: #eaeaea;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/*             BURGER            */
+/* ============================= */
+
+.burger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.burger-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.burger-line.open:nth-child(1) {
+  transform: translateY(4.5px) rotate(45deg);
+}
+
+.burger-line.open:nth-child(2) {
+  transform: translateY(-4.5px) rotate(-45deg);
+}
+
+/* ============================= */
+/*         MOBILE OVERLAY        */
+/* ============================= */
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  z-index: 999;
+}
+
+.mobile-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================= */
+/*         MOBILE PANEL          */
+/* ============================= */
+
+.mobile-panel {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: min(92vw, 380px);
+  height: calc(100vh - 80px);
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateX(100%);
+  transition: transform 0.24s ease;
+  z-index: 1000;
+}
+
+.mobile-panel.show {
+  transform: translateX(0%);
+}
+
+.mobile-inner {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ============================= */
+/*         MOBILE LINKS          */
+/* ============================= */
+
+.mobile-link {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.4px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mobile-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.mobile-cta {
+  margin-top: 6px;
+  padding: 14px;
+  border-radius: 14px;
+  background: white;
+  color: black;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mobile-cta:hover {
+  background: #eaeaea;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/*          RESPONSIVE           */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .nav-links,
+  .cta {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+
+  .navbar-container {
+    padding: 0 18px;
+  }
+
+  .logo-img {
+    height: 52px;   /* logo un peu plus petit sur mobile */
+    width: 180px;
+  }
+}
