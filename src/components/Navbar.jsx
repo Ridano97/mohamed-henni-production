@@ -8,8 +8,8 @@ import "../styles/navbar.css";
 const LINKS = [
   { name: "Accueil", href: "/" },
   { name: "À propos", href: "/a-propos" },
-  { name: "Projet & Réalisation", href: "/projets" },
-  { name: "Partenaire", href: "/partenaires" },
+  { name: "Projets & Réalisations", href: "/projets" },
+  { name: "Partenaires", href: "/partenaires" },
 ];
 
 export default function Navbar() {
