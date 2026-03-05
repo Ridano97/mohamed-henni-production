@@ -95,7 +95,6 @@ export default function AboutSection() {
 
             <p className="about-signature">Vous avez l’expertise. Je la rends visible.</p>
           </div>
-
           <a className="about-cta" href="/contact">Discutons-en</a>
         </div>
       </div>

@@ -45,17 +45,6 @@ export default function Hero() {
         <p className="hero-subtitle">
           Vidéaste • Réalisation • Storytelling
         </p>
-
-        <div className="hero-buttons">
-          <button className="hero-btn primary">
-            Projet suivant
-          </button>
-
-          <a className="hero-btn ghost" href="/contact">
-            Travaillons ensemble
-          </a>
-        </div>
-
         {/* 🎬 GRANDE VIDEO */}
         <div className="hero-video-wrapper">
           <video

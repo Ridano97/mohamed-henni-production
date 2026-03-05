@@ -42,4 +42,4 @@ next-env.d.ts
 
 /public/videos/
 /public/**/*.mp4
-/public/**/*.mov
+

@@ -1,0 +1,180 @@
+.partners{
+background:#ffffff;
+padding:90px 0;
+}
+
+.container{
+max-width:1200px;
+margin:0 auto;
+padding:0 28px;
+}
+
+/* TITRE */
+
+.title{
+text-align:center;
+font-size:clamp(20px,2.2vw,26px);
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+margin-bottom:6px;
+color: black;
+}
+
+.subtitle{
+text-align:center;
+font-size:14px;
+color:rgba(0,0,0,0.6);
+margin-bottom:40px;
+}
+
+/* MARQUEE */
+
+.marquee{
+position:relative;
+overflow:hidden;
+
+border-radius:18px;
+
+background:linear-gradient(180deg,#ffffff,#fafafa);
+
+border:1px solid rgba(0,0,0,0.05);
+
+box-shadow:0 20px 60px rgba(0,0,0,0.07);
+}
+
+/* FADE EDGES */
+
+.marquee::before,
+.marquee::after{
+content:"";
+position:absolute;
+top:0;
+width:120px;
+height:100%;
+z-index:2;
+pointer-events:none;
+}
+
+.marquee::before{
+left:0;
+background:linear-gradient(to right,#ffffff,transparent);
+}
+
+.marquee::after{
+right:0;
+background:linear-gradient(to left,#ffffff,transparent);
+}
+
+/* TRACK */
+
+.track{
+display:flex;
+align-items:center;
+gap:32px;
+
+width:max-content;
+
+padding:26px;
+
+animation:scroll 32s linear infinite;
+}
+
+/* PAUSE AU HOVER */
+
+.marquee:hover .track{
+animation-play-state:paused;
+}
+
+/* LOGO CARD */
+
+.logo{
+width:200px;
+height:80px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:14px;
+
+background:rgba(255,255,255,0.9);
+
+border:1px solid rgba(0,0,0,0.05);
+
+transition:
+transform .25s ease,
+box-shadow .25s ease;
+}
+
+.img{
+width:auto;
+height:48px;
+
+object-fit:contain;
+
+transition:transform .25s ease;
+}
+
+/* HOVER */
+
+.logo:hover{
+transform:translateY(-4px);
+
+box-shadow:0 18px 40px rgba(0,0,0,0.12);
+}
+
+.logo:hover .img{
+transform:scale(1.05);
+}
+
+/* ANIMATION */
+
+@keyframes scroll{
+
+from{
+transform:translateX(0);
+}
+
+to{
+transform:translateX(-50%);
+}
+
+}
+
+/* RESPONSIVE */
+
+@media (max-width:900px){
+
+.track{
+gap:22px;
+animation-duration:36s;
+}
+
+.logo{
+width:160px;
+height:70px;
+}
+
+.img{
+height:42px;
+}
+
+}
+
+@media (max-width:480px){
+
+.logo{
+width:140px;
+height:65px;
+}
+
+.img{
+height:36px;
+}
+
+.track{
+gap:18px;
+}
+
+}
