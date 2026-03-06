@@ -32,16 +32,10 @@ export default function Partners() {
 
   return (
     <section className={styles.partners} id="partenaires">
+    
 
       <div className={styles.container}>
-
-        <h2 className={styles.title}>
-          Ils me font confiance
-        </h2>
-
-        <p className={styles.subtitle}>
-          Groupes industriels, institutions et acteurs majeurs.
-        </p>
+        <span className="domains-kicker">Partenaires</span>
 
         <div className={styles.marquee}>
 

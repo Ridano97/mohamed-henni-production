@@ -9,9 +9,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <body>
+      <head>
+        <link rel="preconnect" href="https://use.typekit.net" />
+        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href="https://use.typekit.net/dtz1fkj.css" />
+      </head>
+      <body suppressHydrationWarning>
         <Navbar />
-        {/* padding-top = hauteur navbar (80px) */}
         <main style={{ paddingTop: "80px" }}>{children}</main>
       </body>
     </html>

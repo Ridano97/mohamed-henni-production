@@ -9,25 +9,6 @@ margin:0 auto;
 padding:0 28px;
 }
 
-/* TITRE */
-
-.title{
-text-align:center;
-font-size:clamp(20px,2.2vw,26px);
-font-weight:900;
-letter-spacing:1px;
-text-transform:uppercase;
-margin-bottom:6px;
-color: black;
-}
-
-.subtitle{
-text-align:center;
-font-size:14px;
-color:rgba(0,0,0,0.6);
-margin-bottom:40px;
-}
-
 /* MARQUEE */
 
 .marquee{

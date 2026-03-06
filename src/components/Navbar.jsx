@@ -6,10 +6,10 @@ import Image from "next/image";
 import "../styles/navbar.css";
 
 const LINKS = [
-  { name: "Accueil", href: "/" },
-  { name: "À propos", href: "/a-propos" },
-  { name: "Projets & Réalisations", href: "/projets" },
-  { name: "Partenaires", href: "/partenaires" },
+  { name: "Accueil", href: "/#home" },
+  { name: "À propos", href: "/#apropos" },
+  { name: "Projets & Réalisations", href: "/projets" }, // page
+  { name: "Partenaires", href: "/#partenaires" },
 ];
 
 export default function Navbar() {
@@ -28,8 +28,9 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-container">
+
         {/* Logo */}
-        <Link href="/" className="logo" onClick={close} aria-label="Accueil">
+        <Link href="#home" className="logo" onClick={close} aria-label="Accueil">
           <div className="logo-img">
             <Image
               src="/Blanc1.png"
@@ -42,21 +43,21 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Navigation desktop */}
         <nav className="nav-links" aria-label="Navigation principale">
           {LINKS.map((l) => (
-            <Link key={l.href} href={l.href}>
+            <Link key={l.href} href={l.href} onClick={close}>
               {l.name}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <Link href="/contact" className="cta">
+        {/* CTA */}
+        <Link href="#contact" className="cta" onClick={close}>
           Travaillons ensemble
         </Link>
 
-        {/* Burger (mobile) */}
+        {/* Burger mobile */}
         <button
           className="burger"
           onClick={() => setOpen((v) => !v)}
@@ -69,13 +70,13 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile overlay */}
+      {/* Overlay mobile */}
       <div
         className={`mobile-overlay ${open ? "show" : ""}`}
         onClick={close}
       />
 
-      {/* Mobile panel */}
+      {/* Menu mobile */}
       <div
         id="mobile-menu"
         className={`mobile-panel ${open ? "show" : ""}`}
@@ -83,6 +84,7 @@ export default function Navbar() {
         aria-modal="true"
       >
         <div className="mobile-inner">
+
           {LINKS.map((l) => (
             <Link
               key={l.href}
@@ -94,9 +96,10 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <Link href="/contact" onClick={close} className="mobile-cta">
+          <Link href="#contact" onClick={close} className="mobile-cta">
             Travaillons ensemble
           </Link>
+
         </div>
       </div>
     </header>

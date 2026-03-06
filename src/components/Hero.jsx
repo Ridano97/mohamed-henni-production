@@ -34,7 +34,7 @@ export default function Hero() {
   const current = PROJECTS[index];
 
   return (
-    <section className="hero">
+    <section id="home" className="hero">
       <div className="hero-bg" />
 
       <div className="hero-container">
