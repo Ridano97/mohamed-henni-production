@@ -8,14 +8,13 @@ import "../styles/navbar.css";
 const LINKS = [
   { name: "Accueil", href: "/#home" },
   { name: "À propos", href: "/#apropos" },
-  { name: "Projets & Réalisations", href: "/projets" }, // page
+  { name: "Projets & Réalisations", href: "/projets" },
   { name: "Partenaires", href: "/#partenaires" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  // Bloque le scroll quand le menu mobile est ouvert
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -28,8 +27,6 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-container">
-
-        {/* Logo */}
         <Link href="#home" className="logo" onClick={close} aria-label="Accueil">
           <div className="logo-img">
             <Image
@@ -43,7 +40,6 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Navigation desktop */}
         <nav className="nav-links" aria-label="Navigation principale">
           {LINKS.map((l) => (
             <Link key={l.href} href={l.href} onClick={close}>
@@ -52,31 +48,28 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA */}
         <Link href="#contact" className="cta" onClick={close}>
           Travaillons ensemble
         </Link>
 
-        {/* Burger mobile */}
         <button
-          className="burger"
+          className={`burger ${open ? "is-open" : ""}`}
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={open}
           aria-controls="mobile-menu"
+          type="button"
         >
           <span className={`burger-line ${open ? "open" : ""}`} />
           <span className={`burger-line ${open ? "open" : ""}`} />
         </button>
       </div>
 
-      {/* Overlay mobile */}
       <div
         className={`mobile-overlay ${open ? "show" : ""}`}
         onClick={close}
       />
 
-      {/* Menu mobile */}
       <div
         id="mobile-menu"
         className={`mobile-panel ${open ? "show" : ""}`}
@@ -84,7 +77,6 @@ export default function Navbar() {
         aria-modal="true"
       >
         <div className="mobile-inner">
-
           {LINKS.map((l) => (
             <Link
               key={l.href}
@@ -99,7 +91,6 @@ export default function Navbar() {
           <Link href="#contact" onClick={close} className="mobile-cta">
             Travaillons ensemble
           </Link>
-
         </div>
       </div>
     </header>

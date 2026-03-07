@@ -33,6 +33,8 @@ export default function International() {
 
   return (
     <section className="international" ref={rootRef}>
+      <div className="international-world" aria-hidden="true" />
+
       <div className="international-container">
         <div className="international-heading" data-reveal>
           <span className="section-kicker international-kicker">International</span>
@@ -54,7 +56,7 @@ export default function International() {
             style={{ transitionDelay: "120ms" }}
           >
             <div className="country-glow" />
-            <div className="country-tag">01</div>
+            <div className="country-tag">🇸🇦</div>
 
             <h3 className="country-title">ARABIE SAOUDITE</h3>
 
@@ -70,6 +72,7 @@ export default function International() {
             style={{ transitionDelay: "260ms" }}
           >
             <div className="country-glow" />
+            <div className="country-tag">🇮🇶</div>
 
             <h3 className="country-title">IRAK</h3>
 
@@ -85,7 +88,7 @@ export default function International() {
             style={{ transitionDelay: "420ms" }}
           >
             <div className="country-glow" />
-            <div className="country-tag">03</div>
+            <div className="country-tag">🇪🇸</div>
 
             <h3 className="country-title">ESPAGNE</h3>
 

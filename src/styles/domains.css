@@ -4,7 +4,7 @@
     radial-gradient(900px 260px at 10% 0%, rgba(0, 0, 0, 0.03), transparent 60%),
     linear-gradient(180deg, #ffffff, #f8f8f6);
   color: #111;
-  padding: 70px 0 120px;
+  padding: 78px 0 120px;
   margin-top: -40px;
   overflow: hidden;
 }
@@ -18,15 +18,49 @@
 /* ================= HEADING ================= */
 
 .domains-heading {
+  position: relative;
   max-width: 760px;
-  margin-bottom: 42px;
+  margin-bottom: 48px;
+  padding-left: 30px;
+
   opacity: 0;
-  transform: translateY(52px);
-  filter: blur(12px);
+  transform: translateY(46px);
+  filter: blur(10px);
+
   transition:
-    opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1600ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Barre verticale premium à gauche du titre */
+.domains-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 42px;
+  width: 2px;
+  height: clamp(62px, 7vw, 88px);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.16) 0%,
+    rgba(0, 0, 0, 0.72) 22%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
+  transform: scaleY(0.72);
+  transform-origin: top;
+  opacity: 0;
+  transition:
+    transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 180ms;
+}
+
+.domains-heading.is-visible::before {
+  transform: scaleY(1);
+  opacity: 1;
 }
 
 .domains-kicker {
@@ -42,10 +76,11 @@
 .domains-title {
   margin: 0;
   font-size: clamp(32px, 5vw, 60px);
-  line-height: 0.98;
+  line-height: 0.96;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.045em;
   color: #111;
+  text-transform: uppercase;
 }
 
 .domains-intro {
@@ -68,9 +103,9 @@
 
 .domain-card {
   position: relative;
-  padding: 38px 34px 36px;
-  min-height: 280px;
-  border-radius: 24px;
+  padding: 40px 34px 38px;
+  min-height: 290px;
+  border-radius: 26px;
   overflow: hidden;
   color: white;
 
@@ -87,15 +122,29 @@
     0 28px 70px rgba(0, 0, 0, 0.14),
     0 1px 0 rgba(255, 255, 255, 0.16) inset;
 
-  transform: translateY(80px) scale(0.96);
+  transform: translateY(70px) scale(0.965);
   opacity: 0;
   filter: blur(12px);
 
   transition:
-    transform 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1600ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1300ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1300ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1300ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.domain-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 30%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  opacity: 0.9;
 }
 
 .domain-orange {
@@ -107,34 +156,36 @@
 .domain-grey {
   background:
     radial-gradient(320px 180px at 15% 12%, rgba(255, 255, 255, 0.12), transparent 60%),
-    linear-gradient(135deg, #b4b7aa 0%, #adb0a4 48%, #a3a79a 100%);
+    linear-gradient(135deg, #b4b7aa 0%, #adb0a4 48%, #9ea294 100%);
 }
 
 .domain-glow {
   position: absolute;
   inset: auto -10% -25% auto;
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
-  filter: blur(40px);
+  filter: blur(42px);
   pointer-events: none;
 }
 
 .domain-icon-wrap {
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
+  position: relative;
+  z-index: 1;
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .domain-svg {
@@ -145,15 +196,20 @@
 }
 
 .domain-title {
+  position: relative;
+  z-index: 1;
   margin: 22px 0 12px;
   font-size: clamp(22px, 2vw, 30px);
-  line-height: 1.1;
+  line-height: 1.04;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: #fff;
+  text-transform: uppercase;
 }
 
 .domain-text {
+  position: relative;
+  z-index: 1;
   max-width: 520px;
   margin: 0;
   font-size: 15px;
@@ -162,9 +218,9 @@
 }
 
 .domain-card:hover {
-  transform: translateY(-8px) scale(1.01);
+  transform: translateY(-8px) scale(1.012);
   box-shadow:
-    0 40px 95px rgba(0, 0, 0, 0.20),
+    0 40px 95px rgba(0, 0, 0, 0.2),
     0 1px 0 rgba(255, 255, 255, 0.18) inset;
 }
 
@@ -180,7 +236,7 @@
 
 @media (max-width: 1024px) {
   .domains {
-    padding: 62px 0 104px;
+    padding: 64px 0 104px;
     margin-top: -28px;
   }
 
@@ -189,8 +245,17 @@
   }
 
   .domain-card {
-    min-height: 250px;
-    padding: 30px 28px 30px;
+    min-height: 255px;
+    padding: 32px 28px 30px;
+  }
+
+  .domains-heading {
+    padding-left: 24px;
+  }
+
+  .domains-heading::before {
+    top: 40px;
+    height: 72px;
   }
 }
 
@@ -200,17 +265,17 @@
   }
 
   .domains-heading {
-    margin-bottom: 32px;
+    margin-bottom: 34px;
   }
 
   .domain-card {
-    min-height: 230px;
+    min-height: 235px;
   }
 }
 
 @media (max-width: 520px) {
   .domains {
-    padding: 48px 0 78px;
+    padding: 50px 0 78px;
     margin-top: -18px;
   }
 
@@ -218,9 +283,19 @@
     padding: 0 18px;
   }
 
+  .domains-heading {
+    padding-left: 18px;
+    margin-bottom: 30px;
+  }
+
+  .domains-heading::before {
+    top: 36px;
+    height: 56px;
+  }
+
   .domains-title {
     font-size: clamp(28px, 10vw, 42px);
-    line-height: 1;
+    line-height: 0.98;
   }
 
   .domains-intro {
@@ -270,6 +345,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .domains-heading,
+  .domains-heading::before,
   .domain-card {
     opacity: 1;
     transform: none;

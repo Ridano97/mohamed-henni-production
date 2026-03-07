@@ -36,6 +36,7 @@ a {
   line-height:1.05;
   letter-spacing:-.02em;
   margin:0;
+  text-transform:uppercase;
 }
 
 .section-intro{

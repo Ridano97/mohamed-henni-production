@@ -1,25 +1,49 @@
 .hero {
   position: relative;
   min-height: calc(100vh - 80px);
-  padding: 60px 0 80px;
   overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #000;
 }
 
+/* ================= VIDEO FULL HERO ================= */
+
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* overlay premium */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       900px 520px at 50% 10%,
       rgba(255, 255, 255, 0.08),
       transparent 60%
     ),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.95));
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.28),
+      rgba(0, 0, 0, 0.52) 45%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -34,13 +58,19 @@
 /* ================= TITLE ================= */
 
 .hero-title {
-  position: relative;
   margin: 0;
   text-transform: uppercase;
-  font-size: clamp(36px, 7vw, 80px);
-  line-height: 1.05;
-  letter-spacing: 2px;
-  z-index: 1;
+
+  font-size: clamp(38px, 7vw, 90px);
+  line-height: 1;
+  font-weight: 800;
+
+  white-space: nowrap; /* empêche le retour à la ligne */
+}
+
+.hero-title span {
+  margin-left: 14px;
+  opacity: 0.9;
 }
 
 .hero-title::before {
@@ -63,105 +93,23 @@
   );
 
   filter: blur(60px);
-  opacity: 0.6;
+  opacity: 0.58;
   z-index: -1;
   pointer-events: none;
 }
 
 .hero-subtitle {
   margin-top: 18px;
-  opacity: 0.75;
-  letter-spacing: 1px;
-  font-size: 14px;
-}
-
-.hero-buttons {
-  margin-top: 26px;
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.hero-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 12px 20px;
-  font-weight: 700;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   font-size: 13px;
-  letter-spacing: 0.8px;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: transform 0.2s ease, background 0.2s ease;
-  text-decoration: none;
-}
-
-.hero-btn.primary {
-  background: white;
-  color: black;
-  border-color: transparent;
-}
-
-.hero-btn.primary:hover {
-  transform: translateY(-2px);
-  background: #efefef;
-}
-
-.hero-btn.ghost {
-  background: rgba(255, 255, 255, 0.06);
-  color: white;
-}
-
-.hero-btn.ghost:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* ================= VIDEO (ONE BIG, AUTO) ================= */
-
-.hero-video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 1000px;
-  margin-top: 60px;
-
-  aspect-ratio: 16 / 9;
-  border-radius: 28px;
-  overflow: hidden;
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: black;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* overlay cinema */
-.hero-video-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.05),
-    rgba(0, 0, 0, 0.65)
-  );
-  pointer-events: none;
+  line-height: 1.6;
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 1024px) {
-  .hero-video-wrapper {
-    max-width: 900px;
-  }
-
   .hero-title::before {
     width: 130%;
     height: 150%;
@@ -172,13 +120,13 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 40px 0 50px;
+    min-height: calc(100svh - 80px);
   }
 
   .hero-title {
-    font-size: clamp(24px, 8vw, 38px);
-    line-height: 1.1;
-    letter-spacing: 1px;
+    font-size: clamp(28px, 10vw, 48px);
+    line-height: 1.02;
+    max-width: 11ch;
   }
 
   .hero-title::before {
@@ -189,25 +137,9 @@
   }
 
   .hero-subtitle {
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 12px;
-  }
-
-  .hero-buttons {
-    margin-top: 18px;
-    gap: 10px;
-  }
-
-  .hero-btn {
-    padding: 10px 16px;
-    font-size: 12px;
-  }
-
-  /* vidéo plus compacte sur mobile */
-  .hero-video-wrapper {
-    margin-top: 28px;
-    border-radius: 18px;
-    aspect-ratio: 16 / 11; /* plus compact visuellement */
+    letter-spacing: 0.14em;
   }
 }
 

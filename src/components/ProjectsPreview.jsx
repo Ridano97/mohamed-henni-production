@@ -32,7 +32,7 @@ export default function ProjectsPreview() {
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
           e.target.classList.add(styles.visible);
-          io.unobserve(e.target); // ✅ reveal une seule fois (propre)
+          io.unobserve(e.target);
         });
       },
       {
@@ -52,9 +52,10 @@ export default function ProjectsPreview() {
           <div className={styles.leftTitle}>
             <div className={styles.bar} />
             <h2 className={styles.h2}>
-              DE LA VISION <br /> À L’IMAGE
+              De La Vision <br /> À L’Image
             </h2>
           </div>
+
           <p className={styles.desc}>
             Découvrez mes projets vidéo et photo réalisés pour différentes marques et entreprises.
             Cliquez sur un visuel pour parcourir l’ensemble des créations.
@@ -68,7 +69,7 @@ export default function ProjectsPreview() {
               href="/projets"
               className={`${styles.card} ${styles[`card${i + 1}`]}`}
               data-reveal
-              data-delay={String(i * 90)}
+              style={{ "--d": `${i * 90}ms` }}
               aria-label={`Voir les projets (visuel ${i + 1})`}
             >
               <Image

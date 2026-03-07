@@ -72,7 +72,7 @@ export default function AboutSection() {
         <div className="about-right" data-reveal style={{ "--d": "120ms" }}>
           <span className="domains-kicker">À propos</span>
           <div className="about-title-row">
-            <h2 className="about-title">L’IMAGE, PENSÉE POUR PERFORMER</h2>
+            <h2 className="about-title">L’Image, Pensée pour Performer</h2>
             <span className="about-line" />
           </div>
 

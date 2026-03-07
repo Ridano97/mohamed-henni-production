@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../styles/hero.css";
 
 const PROJECTS = [
@@ -13,7 +13,6 @@ export default function Hero() {
   const [index, setIndex] = useState(0);
   const videoRef = useRef(null);
 
-  // 🔥 Auto slide toutes les 8 secondes
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % PROJECTS.length);
@@ -22,7 +21,6 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // 🔥 Restart video quand ça change
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -35,33 +33,28 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
+      <video
+        key={current.video}
+        ref={videoRef}
+        className="hero-video-bg"
+        src={current.video}
+        poster={current.poster}
+        muted
+        playsInline
+        autoPlay
+        loop
+        preload="metadata"
+      />
+
       <div className="hero-bg" />
 
       <div className="hero-container">
         <h1 className="hero-title">
-          Mohamed Henni Production
+            Mohamed Henni <span>Production</span>
         </h1>
-
         <p className="hero-subtitle">
           Vidéaste • Réalisation • Storytelling
         </p>
-        {/* 🎬 GRANDE VIDEO */}
-        <div className="hero-video-wrapper">
-          <video
-            key={current.video}
-            ref={videoRef}
-            className="hero-video"
-            src={current.video}
-            poster={current.poster}
-            muted
-            playsInline
-            autoPlay
-            loop
-            preload="metadata"
-          />
-
-          <div className="hero-video-overlay" />
-        </div>
       </div>
     </section>
   );
