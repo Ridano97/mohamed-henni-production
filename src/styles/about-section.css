@@ -179,6 +179,7 @@
   font-size: 14px;
   line-height: 1.9;
   color: rgba(0, 0, 0, 0.78);
+  text-align: justify;
 }
 
 .about-text p {
