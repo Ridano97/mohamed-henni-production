@@ -53,7 +53,7 @@ export default function Hero() {
             Mohamed Henni <span>Production</span>
         </h1>
         <p className="hero-subtitle">
-          Vidéaste • Réalisation • Storytelling
+          Vidéaste • Industrie • Événementiel • Mariage
         </p>
       </div>
     </section>

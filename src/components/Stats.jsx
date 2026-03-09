@@ -29,7 +29,7 @@ export default function Stats() {
   const ITEMS = useMemo(
     () => [
       { end: 10, prefix: "+", suffix: "", label: "ans d’expérience" },
-      { end: 2500, prefix: "+", suffix: "", label: "vidéos réalisées" },
+      { end: 5000, prefix: "+", suffix: "", label: "vidéos réalisées" },
       { end: 4, prefix: "+", suffix: "M", label: "de vues sur les réseaux" },
     ],
     []
