@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import "../styles/hero.css";
 
 const PROJECTS = [
@@ -11,7 +12,13 @@ const PROJECTS = [
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
+  const [isReady, setIsReady] = useState(false);
   const videoRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsReady(true), 120);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,14 +32,20 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
-    video.currentTime = 0;
-    video.play().catch(() => {});
+    const tryPlay = async () => {
+      try {
+        video.currentTime = 0;
+        await video.play();
+      } catch {}
+    };
+
+    tryPlay();
   }, [index]);
 
   const current = PROJECTS[index];
 
   return (
-    <section id="home" className="hero">
+    <section id="home" className={`hero ${isReady ? "is-ready" : ""}`}>
       <video
         key={current.video}
         ref={videoRef}
@@ -46,14 +59,25 @@ export default function Hero() {
         preload="metadata"
       />
 
-      <div className="hero-bg" />
+      <div className="hero-overlay" />
+      <div className="hero-noise" />
 
       <div className="hero-container">
-        <h1 className="hero-title">
-            Mohamed Henni <span>Production</span>
-        </h1>
+        <div className="hero-logo-wrap">
+          <div className="hero-logo">
+            <Image
+              src="/Blanc2-v3.png"
+              alt="Mohamed Henni Production"
+              fill
+              priority
+              className="hero-logo-img"
+              sizes="100vw"
+            />
+          </div>
+        </div>
+
         <p className="hero-subtitle">
-          Vidéaste • Industrie • Événementiel • Mariage
+          VIDÉASTE • INDUSTRIE • ÉVÉNEMENTIEL • MARIAGE
         </p>
       </div>
     </section>

@@ -1,98 +1,195 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import "../../styles/projets.css";
 
 const PROJECTS = [
+  // ── Artistique & Événement ──
   {
-    title: "Projet 01",
-    category: "Corporate",
-    video: "/videos/projet-01.mp4",
+    title: "Projet Artistique 01",
+    category: "Artistique & Événement",
+    videoId: "65c69bc21b6ef2d87678af74d05083ff",
+    description: "Création artistique et mise en scène visuelle.",
+  },
+  {
+    title: "Projet Artistique 02",
+    category: "Artistique & Événement",
+    videoId: "b22aef93e3b6ecb2fdabcb71bfcc45d7",
+    description: "Captation d'événement à forte dimension artistique.",
+  },
+
+  // ── Entreprise ──
+  {
+    title: "Projet Entreprise 01",
+    category: "Entreprise",
+    videoId: "9fcfce68bbf6ee3323b3bea5b2267ced",
     description: "Film corporate et image de marque.",
   },
   {
-    title: "Projet 02",
-    category: "Événement",
-    video: "/videos/projet-02.mp4",
-    description: "Captation et narration d’événement.",
+    title: "Projet Entreprise 02",
+    category: "Entreprise",
+    videoId: "5ed663c8861c674fe1e14d187589d9ef",
+    description: "Présentation institutionnelle et storytelling.",
   },
   {
-    title: "Projet 03",
-    category: "Publicité",
-    video: "/videos/projet-03.mp4",
-    description: "Contenu promotionnel et storytelling visuel.",
+    title: "Projet Entreprise 03",
+    category: "Entreprise",
+    videoId: "8c1e109e92608a9e3e6c5c0ee861d422",
+    description: "Communication interne et image corporate.",
+  },
+  {
+    title: "Projet Entreprise 04",
+    category: "Entreprise",
+    videoId: "4e4edde0b3b29c54c0f81d53144d5ff9",
+    description: "Film de marque et identité visuelle.",
+  },
+  {
+    title: "Projet Entreprise 05",
+    category: "Entreprise",
+    videoId: "e58eccbeab95ec00d15c8d3ffe4c89c0",
+    description: "Contenu promotionnel et brand content.",
+  },
+  {
+    title: "Projet Entreprise 06",
+    category: "Entreprise",
+    videoId: "36ebbf5575263a824e84e77e67c10830",
+    description: "Captation et narration d&apos;événement.",
+  },
+
+  // ── Mariage ──
+  {
+    title: "Projet Mariage 01",
+    category: "Mariage",
+    videoId: "0d57fb418d859dd105c136ad07796383",
+    description: "Film de mariage cinématographique.",
+  },
+  {
+    title: "Projet Mariage 02",
+    category: "Mariage",
+    videoId: "afbc3addb86852539219d10688c6c970",
+    description: "Captation émotionnelle d&apos;un jour unique.",
+  },
+
+  // ── Industrie ──
+  {
+    title: "Projet Industrie 01",
+    category: "Industrie",
+    videoId: "60d5e56d96a92dd2b2671bdacf8578a7",
+    description: "Reportage industriel et savoir-faire technique.",
+  },
+  {
+    title: "Projet Industrie 02",
+    category: "Industrie",
+    videoId: "532566ba5e337c4be840ceaf6031d55e",
+    description: "Film de production et procédés industriels.",
+  },
+  {
+    title: "Projet Industrie 03",
+    category: "Industrie",
+    videoId: "838057b1b93aac767501e29a7b523d7b",
+    description: "Valorisation du patrimoine industriel.",
+  },
+  {
+    title: "Projet Industrie 04",
+    category: "Industrie",
+    videoId: "2d4fce9f71c84b8223284d70178f775b",
+    description: "Mise en image des métiers et du terrain.",
+  },
+  {
+    title: "Projet Industrie 05",
+    category: "Industrie",
+    videoId: "f844c9c01fe0e2cb470aea9e9d9d0274",
+    description: "Documentaire technique et immersion industrielle.",
   },
 ];
 
-const FILTERS = ["Tous", "Corporate", "Événement", "Publicité"];
+const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "Industrie"];
+
+const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
+const CF_THUMB_BASE  = "https://videodelivery.net";
 
 export default function ProjetsPage() {
-  const [activeFilter, setActiveFilter] = useState("Tous");
+  const [activeFilter,  setActiveFilter]  = useState("Tous");
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const videoRefs = useRef({});
+  const [hoveredKey,    setHoveredKey]    = useState(null);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "Tous") return PROJECTS;
-    return PROJECTS.filter((project) => project.category === activeFilter);
+    return PROJECTS.filter((p) => p.category === activeFilter);
   }, [activeFilter]);
 
-  const handleMouseEnter = (key) => {
-    const video = videoRefs.current[key];
-    if (!video) return;
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") setSelectedVideo(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
-    video.currentTime = 0;
-    video.play().catch(() => {});
-  };
+  useEffect(() => {
+    document.body.style.overflow = selectedVideo ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [selectedVideo]);
 
-  const handleMouseLeave = (key) => {
-    const video = videoRefs.current[key];
-    if (!video) return;
-
-    video.pause();
-    video.currentTime = 0;
-  };
+  const heroProject = PROJECTS[0];
 
   return (
     <main className="projects-page">
+
+      {/* ── HERO ── */}
       <section className="projects-hero">
-        <div className="projects-container">
-          <div className="projects-heading">
+        <iframe
+          className="projects-hero-video"
+          src={`${CF_STREAM_BASE}/${heroProject.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          style={{ pointerEvents: "none", border: "none" }}
+          title="Hero background video"
+        />
+        <div className="projects-hero-overlay" />
+        <div className="projects-container projects-hero-container">
+          <div className="projects-hero-content">
             <span className="projects-kicker">Réalisations</span>
-
             <h1 className="projects-title">
-              Projets &amp; Réalisations
+              De La Vision <br />À L&apos;Image
             </h1>
-
             <p className="projects-intro">
-              Une sélection de productions vidéo pensées pour la marque,
-              l’entreprise, l’événementiel et la publicité.
+              Découvrez une sélection de productions vidéo conçues pour la
+              marque, l&apos;entreprise, l&apos;événementiel et les univers exigeants.
             </p>
+            <a href="#projects-grid" className="projects-hero-cta">
+              Voir les projets
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="projects-content">
+      {/* ── GRILLE ── */}
+      <section className="projects-content" id="projects-grid">
         <div className="projects-container">
-          <div className="projects-toolbar">
-            <div className="projects-filters" aria-label="Filtres projets">
-              {FILTERS.map((filter) => (
-                <button
-                  key={filter}
-                  type="button"
-                  className={`projects-filter ${
-                    activeFilter === filter ? "is-active" : ""
-                  }`}
-                  onClick={() => setActiveFilter(filter)}
-                >
-                  {filter}
-                </button>
-              ))}
+          <div className="projects-section-heading">
+            <div className="projects-heading">
+              <span className="projects-kicker">Sélection</span>
+              <h2 className="projects-section-title">Projets &amp; Réalisations</h2>
+            </div>
+            <div className="projects-toolbar">
+              <div className="projects-filters" aria-label="Filtres projets">
+                {FILTERS.map((filter) => (
+                  <button
+                    key={filter}
+                    type="button"
+                    className={`projects-filter ${activeFilter === filter ? "is-active" : ""}`}
+                    onClick={() => setActiveFilter(filter)}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="projects-grid">
             {filteredProjects.map((project, index) => {
-              const key = `${project.title}-${index}`;
+              const key       = `${project.videoId}-${index}`;
+              const isHovered = hoveredKey === key;
 
               return (
                 <article key={key} className="project-card">
@@ -100,42 +197,36 @@ export default function ProjetsPage() {
                     type="button"
                     className="project-media"
                     onClick={() => setSelectedVideo(project)}
-                    onMouseEnter={() => handleMouseEnter(key)}
-                    onMouseLeave={() => handleMouseLeave(key)}
-                    onFocus={() => handleMouseEnter(key)}
-                    onBlur={() => handleMouseLeave(key)}
+                    onMouseEnter={() => setHoveredKey(key)}
+                    onMouseLeave={() => setHoveredKey(null)}
+                    onFocus={() => setHoveredKey(key)}
+                    onBlur={() => setHoveredKey(null)}
                     aria-label={`Ouvrir ${project.title}`}
                   >
-                    <video
-                      ref={(el) => {
-                        videoRefs.current[key] = el;
-                      }}
+                    <Image
                       className="project-video"
-                      src={project.video}
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
+                      src={`${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 50vw"
                     />
 
+                    {isHovered && (
+                      <iframe
+                        className="project-video project-video-hover"
+                        src={`${CF_STREAM_BASE}/${project.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        style={{ pointerEvents: "none", border: "none", position: "absolute", inset: 0 }}
+                        title={project.title}
+                      />
+                    )}
+
                     <div className="project-overlay" />
-
-                    <div className="project-play">
-                      <span />
-                    </div>
-
+                    <div className="project-play"><span /></div>
                     <div className="project-meta">
-                      <span className="project-category">
-                        {project.category}
-                      </span>
-
-                      <h2 className="project-title">
-                        {project.title}
-                      </h2>
-
-                      <p className="project-description">
-                        {project.description}
-                      </p>
+                      <span className="project-category">{project.category}</span>
+                      <h3 className="project-title">{project.title}</h3>
+                      <p className="project-description">{project.description}</p>
                     </div>
                   </button>
                 </article>
@@ -145,6 +236,7 @@ export default function ProjetsPage() {
         </div>
       </section>
 
+      {/* ── LIGHTBOX ── */}
       {selectedVideo && (
         <div
           className="projects-lightbox"
@@ -153,43 +245,34 @@ export default function ProjetsPage() {
           aria-label={selectedVideo.title}
           onClick={() => setSelectedVideo(null)}
         >
-          <div
-            className="projects-lightbox-inner"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="projects-lightbox-inner" onClick={(e) => e.stopPropagation()}>
             <button
               type="button"
               className="projects-lightbox-close"
               aria-label="Fermer la vidéo"
               onClick={() => setSelectedVideo(null)}
             >
-              <span />
-              <span />
+              <span /><span />
             </button>
-
             <div className="projects-lightbox-video-wrap">
-              <video
+              <iframe
                 className="projects-lightbox-video"
-                src={selectedVideo.video}
-                controls
-                autoPlay
-                playsInline
-                preload="metadata"
+                src={`${CF_STREAM_BASE}/${selectedVideo.videoId}?autoplay=true&controls=true&preload=true`}
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                style={{ border: "none" }}
+                title={selectedVideo.title}
               />
             </div>
-
             <div className="projects-lightbox-info">
-              <span className="project-category">
-                {selectedVideo.category}
-              </span>
-
+              <span className="project-category">{selectedVideo.category}</span>
               <h3>{selectedVideo.title}</h3>
-
               <p>{selectedVideo.description}</p>
             </div>
           </div>
         </div>
       )}
+
     </main>
   );
 }
