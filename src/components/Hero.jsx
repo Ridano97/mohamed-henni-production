@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import "../styles/hero.css";
 
-const PROJECTS = [
-  { video: "/videos/projet-01.mp4", poster: "/projet-01.jpg" },
-  { video: "/videos/projet-02.mp4", poster: "/projet-02.jpg" },
-  { video: "/videos/projet-03.mp4", poster: "/projet-03.jpg" },
+const VIDEOS = [
+  "60d5e56d96a92dd2b2671bdacf8578a7",
+  "f844c9c01fe0e2cb470aea9e9d9d0274",
+  "e58eccbeab95ec00d15c8d3ffe4c89c0",
 ];
+const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
-  const videoRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsReady(true), 120);
@@ -22,42 +22,29 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % PROJECTS.length);
-    }, 15000);
-
+      setIndex((prev) => (prev + 1) % VIDEOS.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const tryPlay = async () => {
-      try {
-        video.currentTime = 0;
-        await video.play();
-      } catch {}
-    };
-
-    tryPlay();
-  }, [index]);
-
-  const current = PROJECTS[index];
-
   return (
     <section id="home" className={`hero ${isReady ? "is-ready" : ""}`}>
-      <video
-        key={current.video}
-        ref={videoRef}
-        className="hero-video-bg"
-        src={current.video}
-        poster={current.poster}
-        muted
-        playsInline
-        autoPlay
-        loop
-        preload="metadata"
-      />
+      {VIDEOS.map((id, i) => (
+        <iframe
+          key={id}
+          className="hero-video-bg"
+          src={`${CF_STREAM_BASE}/${id}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          style={{
+            pointerEvents: "none",
+            border: "none",
+            opacity: i === index ? 1 : 0,
+            transition: "opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
+            zIndex: i === index ? 0 : -1,
+          }}
+          title={`Hero video ${i + 1}`}
+        />
+      ))}
 
       <div className="hero-overlay" />
       <div className="hero-noise" />
@@ -66,7 +53,7 @@ export default function Hero() {
         <div className="hero-logo-wrap">
           <div className="hero-logo">
             <Image
-              src="/Blanc2-v3.png"
+              src="/Blanc2-v4.png"
               alt="Mohamed Henni Production"
               fill
               priority

@@ -19,7 +19,7 @@ export default function Footer() {
             >
               <div className="footer-logo">
                 <Image
-                  src="/Blanc2-v3.png"
+                  src="/logo-footer.png"
                   alt="Mohamed Henni Production"
                   fill
                   className="footer-logo-img"
@@ -32,7 +32,6 @@ export default function Footer() {
               <a href="mailto:mohamedhenniproduction@gmail.com">
                 mohamedhenniproduction@gmail.com
               </a>
-
               <a href="tel:+33760121990">
                 +33 7 60 12 19 90
               </a>
@@ -41,7 +40,6 @@ export default function Footer() {
 
           {/* CENTER - SOCIALS */}
           <div className="footer-socials">
-
             <a
               href="https://www.facebook.com/MohamedHenniProd"
               target="_blank"
@@ -87,6 +85,20 @@ export default function Footer() {
               />
             </a>
 
+            <a
+              href="https://fr.linkedin.com/in/mohamed-henni-630187141"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <Image
+                src="/linkedin.png"
+                alt="LinkedIn"
+                width={40}
+                height={40}
+                className="footer-social-img"
+              />
+            </a>
           </div>
 
           {/* RIGHT */}
@@ -101,7 +113,7 @@ export default function Footer() {
 
         {/* BOTTOM */}
         <div className="footer-bottom">
-          <p> Copyright © 2026 - Tous droits réservés</p>
+          <p>Copyright © 2026 - Tous droits réservés</p>
           <p>Développé par RIO DIGITAL LAB</p>
         </div>
       </div>

@@ -7,100 +7,93 @@ import "../../styles/projets.css";
 const PROJECTS = [
   // ── Artistique & Événement ──
   {
-    title: "Projet Artistique 01",
+    title: "CROUSTY RICE",
     category: "Artistique & Événement",
     videoId: "65c69bc21b6ef2d87678af74d05083ff",
-    description: "Création artistique et mise en scène visuelle.",
   },
   {
-    title: "Projet Artistique 02",
+    title: "CHAPPELLE DU PORT DUNKERQUE",
     category: "Artistique & Événement",
     videoId: "b22aef93e3b6ecb2fdabcb71bfcc45d7",
-    description: "Captation d'événement à forte dimension artistique.",
   },
 
   // ── Entreprise ──
   {
-    title: "Projet Entreprise 01",
+    title: "MATERNITÉ ANGÈLE BARBION",
     category: "Entreprise",
     videoId: "9fcfce68bbf6ee3323b3bea5b2267ced",
-    description: "Film corporate et image de marque.",
   },
   {
-    title: "Projet Entreprise 02",
+    title: "DFDS LONDRES",
     category: "Entreprise",
     videoId: "5ed663c8861c674fe1e14d187589d9ef",
     description: "Présentation institutionnelle et storytelling.",
   },
   {
-    title: "Projet Entreprise 03",
+    title: "OSAKA",
     category: "Entreprise",
     videoId: "8c1e109e92608a9e3e6c5c0ee861d422",
-    description: "Communication interne et image corporate.",
   },
   {
-    title: "Projet Entreprise 04",
+    title: "THE SMILES KNOKKE",
     category: "Entreprise",
     videoId: "4e4edde0b3b29c54c0f81d53144d5ff9",
-    description: "Film de marque et identité visuelle.",
   },
   {
-    title: "Projet Entreprise 05",
+    title: "ALUMINIUM DUNKERQUE",
+    category: "Entreprise",
+    videoId: "042b2bc38defb7830b80675fb344a7d4",
+  },
+
+  {
+    title: "ALUMINIUM DUNKERQUE PASSION",
     category: "Entreprise",
     videoId: "e58eccbeab95ec00d15c8d3ffe4c89c0",
-    description: "Contenu promotionnel et brand content.",
   },
+
   {
-    title: "Projet Entreprise 06",
+    title: "lYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
     category: "Entreprise",
     videoId: "36ebbf5575263a824e84e77e67c10830",
-    description: "Captation et narration d&apos;événement.",
   },
 
   // ── Mariage ──
   {
-    title: "Projet Mariage 01",
+    title: "ÉLODIE & QUENTIN",
     category: "Mariage",
     videoId: "0d57fb418d859dd105c136ad07796383",
-    description: "Film de mariage cinématographique.",
   },
   {
-    title: "Projet Mariage 02",
+    title: "KAMILLE & BENJAMIN",
     category: "Mariage",
     videoId: "afbc3addb86852539219d10688c6c970",
-    description: "Captation émotionnelle d&apos;un jour unique.",
   },
 
   // ── Industrie ──
   {
-    title: "Projet Industrie 01",
+    title: "TOTAL IRAK",
     category: "Industrie",
     videoId: "60d5e56d96a92dd2b2671bdacf8578a7",
-    description: "Reportage industriel et savoir-faire technique.",
   },
   {
-    title: "Projet Industrie 02",
+    title: "MOOC IRAK - TOTAL ENERGIES",
     category: "Industrie",
     videoId: "532566ba5e337c4be840ceaf6031d55e",
-    description: "Film de production et procédés industriels.",
   },
   {
-    title: "Projet Industrie 03",
+    title: "CHANTIER OA8",
     category: "Industrie",
     videoId: "838057b1b93aac767501e29a7b523d7b",
-    description: "Valorisation du patrimoine industriel.",
   },
   {
-    title: "Projet Industrie 04",
+    title: "SPIE BATIGNOLLES",
     category: "Industrie",
     videoId: "2d4fce9f71c84b8223284d70178f775b",
-    description: "Mise en image des métiers et du terrain.",
   },
   {
-    title: "Projet Industrie 05",
+    title: "CHANTIER RIA",
     category: "Industrie",
     videoId: "f844c9c01fe0e2cb470aea9e9d9d0274",
-    description: "Documentaire technique et immersion industrielle.",
   },
 ];
 
