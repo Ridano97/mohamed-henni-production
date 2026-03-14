@@ -27,7 +27,6 @@ const PROJECTS = [
     title: "DFDS LONDRES",
     category: "Entreprise",
     videoId: "5ed663c8861c674fe1e14d187589d9ef",
-    description: "Présentation institutionnelle et storytelling.",
   },
   {
     title: "OSAKA",

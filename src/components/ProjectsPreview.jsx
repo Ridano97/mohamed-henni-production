@@ -7,11 +7,11 @@ import styles from "@/styles/projects-preview.module.css";
 
 const PHOTOS = [
   "/projects/photo1.jpg",
-  "/projects/photo2-v2.jpg",
   "/projects/photo3-v2.jpg",
+  "/projects/photo11.jpg",
   "/projects/photo4-v3.jpg",
+  "/projects/photo6-v3.jpg",
   "/projects/photo5.jpg",
-  "/projects/photo6-v2.jpg",
   "/projects/photo7.jpg",
   "/projects/photo8.jpg",
   "/projects/photo9.jpg",

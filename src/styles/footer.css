@@ -121,7 +121,9 @@
   width: 40px;
   height: 40px;
   object-fit: contain;
+  /* force tous les icônes en blanc pur, quelle que soit leur couleur d'origine */
   filter: brightness(0) invert(1);
+  opacity: 0.85;
 
   transition:
     transform 0.25s ease,
@@ -131,8 +133,9 @@
 
 .footer-socials a:hover .footer-social-img {
   transform: translateY(-4px) scale(1.08);
-  opacity: 0.9;
-  filter: brightness(1.15);
+  opacity: 1;
+  /* on garde le même filtre blanc, on ne change pas la couleur */
+  filter: brightness(0) invert(1);
 }
 
 /* ================= RIGHT ================= */

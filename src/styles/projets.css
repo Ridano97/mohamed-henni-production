@@ -582,7 +582,7 @@
 
 @media (max-width: 900px) {
   .projects-hero {
-    min-height: 86svh;
+    min-height: 60svh;       /* ← réduit l'espace noir vs 86svh */
   }
 
   .projects-hero-container {
@@ -635,7 +635,7 @@
   }
 
   .projects-hero {
-    min-height: 78svh;
+    min-height: 55svh;       /* ← réduit l'espace noir vs 78svh */
   }
 
   .projects-hero-container {
