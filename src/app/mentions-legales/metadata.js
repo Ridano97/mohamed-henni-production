@@ -9,7 +9,7 @@ export const metadata = {
     follow: false,
   },
   alternates: {
-    canonical: "https://www.mohamedhenniproduction.com/mentions-legales",
+    canonical: "https://mohamed-henni-production.vercel.app/mentions-legales",
   },
 };
  

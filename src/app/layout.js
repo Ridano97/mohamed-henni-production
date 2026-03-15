@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
 
-const DOMAIN = "https://www.mohamedhenniproduction.com";
+const DOMAIN = "https://mohamed-henni-production.vercel.app";
 
 export const metadata = {
   metadataBase: new URL(DOMAIN),
