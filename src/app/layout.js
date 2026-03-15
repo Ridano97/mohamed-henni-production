@@ -72,11 +72,6 @@ export const metadata = {
   alternates: {
     canonical: DOMAIN,
   },
-
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
 };
 
 // ── Schema.org JSON-LD — LocalBusiness ──
@@ -148,6 +143,13 @@ export default function RootLayout({ children }) {
         <noscript>
           <link rel="stylesheet" href="https://use.typekit.net/dtz1fkj.css" />
         </noscript>
+
+        {/* ── Favicons ── */}
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body suppressHydrationWarning>
         {/* Schema.org JSON-LD */}

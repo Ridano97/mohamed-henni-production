@@ -4,11 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import "../../styles/projets.css";
 
-// ── Metadata (Next.js l'exporte même avec "use client" sur une page) ──
-// ⚠️  Pour que les metadata fonctionnent sur une page "use client",
-//     crée un fichier séparé : src/app/projets/metadata.js
-//     avec le contenu ci-dessous (voir fichier metadata-projets.js livré avec)
-
 const PROJECTS = [
   // ── Artistique & Événement ──
   {
@@ -104,6 +99,9 @@ const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "I
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 const CF_THUMB_BASE  = "https://videodelivery.net";
 
+// Nombre de cartes visibles sans scroll — chargées en priorité
+const PRIORITY_COUNT = 4;
+
 export default function ProjetsPage() {
   const [activeFilter,  setActiveFilter]  = useState("Tous");
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -185,6 +183,9 @@ export default function ProjetsPage() {
             {filteredProjects.map((project, index) => {
               const key       = `${project.videoId}-${index}`;
               const isHovered = hoveredKey === key;
+              // Les 4 premières cartes sont chargées immédiatement (above the fold)
+              // Les suivantes sont lazy-loadées au scroll
+              const isAboveFold = index < PRIORITY_COUNT;
 
               return (
                 <article key={key} className="project-card">
@@ -203,7 +204,10 @@ export default function ProjetsPage() {
                       src={`${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 900px) 100vw, 50vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 900px) 100vw, 50vw"
+                      quality={75}
+                      priority={isAboveFold}      // ← priorité uniquement sur les 4 premières
+                      loading={isAboveFold ? "eager" : "lazy"} // ← lazy pour toutes les autres
                     />
 
                     {isHovered && (
