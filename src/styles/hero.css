@@ -11,6 +11,21 @@
   background: #000;
 }
 
+/* ================= POSTER (image instantanée pendant chargement vidéo) ================= */
+
+.hero-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-poster img {
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.96) contrast(1.03) brightness(0.84);
+}
+
 /* ================= VIDEO STAGE ================= */
 
 .hero-video-stage {
@@ -262,7 +277,7 @@
 
 @media (max-width: 900px) {
   .hero {
-    min-height: 55svh; /* ← réduit vs calc(100svh - 80px) */
+    min-height: 55svh;
   }
 
   .hero-container {
@@ -306,7 +321,7 @@
 
 @media (max-width: 640px) {
   .hero {
-    min-height: 50svh; /* ← réduit vs calc(100svh - 74px) */
+    min-height: 50svh;
   }
 
   .hero-container {

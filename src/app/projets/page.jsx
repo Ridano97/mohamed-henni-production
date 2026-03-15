@@ -99,13 +99,16 @@ const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "I
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 const CF_THUMB_BASE  = "https://videodelivery.net";
 
-// Nombre de cartes visibles sans scroll — chargées en priorité
 const PRIORITY_COUNT = 4;
 
 export default function ProjetsPage() {
-  const [activeFilter,  setActiveFilter]  = useState("Tous");
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [hoveredKey,    setHoveredKey]    = useState(null);
+  const [activeFilter,     setActiveFilter]     = useState("Tous");
+  const [selectedVideo,    setSelectedVideo]    = useState(null);
+  const [hoveredKey,       setHoveredKey]       = useState(null);
+  const [heroVideoLoaded,  setHeroVideoLoaded]  = useState(false);
+
+  const heroProject = PROJECTS[0];
+  const heroPoster  = `${CF_THUMB_BASE}/${heroProject.videoId}/thumbnails/thumbnail.jpg?time=2s&width=1920`;
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "Tous") return PROJECTS;
@@ -123,20 +126,38 @@ export default function ProjetsPage() {
     return () => { document.body.style.overflow = ""; };
   }, [selectedVideo]);
 
-  const heroProject = PROJECTS[0];
-
   return (
     <main className="projects-page">
 
       {/* ── HERO ── */}
       <section className="projects-hero">
+
+        {/* Poster — image instantanée pendant que l'iframe charge */}
+        <Image
+          src={heroPoster}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            opacity: heroVideoLoaded ? 0 : 1,
+            transition: "opacity 800ms ease",
+            zIndex: 0,
+          }}
+        />
+
+        {/* Vidéo hero Cloudflare */}
         <iframe
           className="projects-hero-video"
           src={`${CF_STREAM_BASE}/${heroProject.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          style={{ pointerEvents: "none", border: "none" }}
+          onLoad={() => setTimeout(() => setHeroVideoLoaded(true), 800)}
+          style={{ pointerEvents: "none", border: "none", zIndex: 1 }}
           title="Hero background video"
         />
+
         <div className="projects-hero-overlay" />
         <div className="projects-container projects-hero-container">
           <div className="projects-hero-content">
@@ -181,10 +202,8 @@ export default function ProjetsPage() {
 
           <div className="projects-grid">
             {filteredProjects.map((project, index) => {
-              const key       = `${project.videoId}-${index}`;
-              const isHovered = hoveredKey === key;
-              // Les 4 premières cartes sont chargées immédiatement (above the fold)
-              // Les suivantes sont lazy-loadées au scroll
+              const key         = `${project.videoId}-${index}`;
+              const isHovered   = hoveredKey === key;
               const isAboveFold = index < PRIORITY_COUNT;
 
               return (
@@ -206,8 +225,8 @@ export default function ProjetsPage() {
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 900px) 100vw, 50vw"
                       quality={75}
-                      priority={isAboveFold}      // ← priorité uniquement sur les 4 premières
-                      loading={isAboveFold ? "eager" : "lazy"} // ← lazy pour toutes les autres
+                      priority={isAboveFold}
+                      loading={isAboveFold ? "eager" : "lazy"}
                     />
 
                     {isHovered && (
