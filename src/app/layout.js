@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
 
-const DOMAIN = "https://mohamed-henni-production.vercel.app";
+const DOMAIN = "https://mohamed-henni-production.vercel.app"; // ← remplacer par ton domaine final
 
 export const metadata = {
   metadataBase: new URL(DOMAIN),
@@ -132,11 +132,25 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <head>
+        {/* ── Preconnect Typekit & Cloudflare ── */}
         <link rel="preconnect" href="https://use.typekit.net" />
         <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
-        <link rel="stylesheet" href="https://use.typekit.net/dtz1fkj.css" />
+        <link rel="preconnect" href="https://iframe.cloudflarestream.com" />
+        <link rel="preconnect" href="https://videodelivery.net" />
+
+        {/* ── Typekit non-bloquant — fix render blocking (-710ms) ── */}
+        <link
+          rel="preload"
+          href="https://use.typekit.net/dtz1fkj.css"
+          as="style"
+          onLoad="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+          <link rel="stylesheet" href="https://use.typekit.net/dtz1fkj.css" />
+        </noscript>
       </head>
       <body suppressHydrationWarning>
+        {/* Schema.org JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
