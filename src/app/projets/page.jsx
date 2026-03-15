@@ -4,6 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import "../../styles/projets.css";
 
+// ── Metadata (Next.js l'exporte même avec "use client" sur une page) ──
+// ⚠️  Pour que les metadata fonctionnent sur une page "use client",
+//     crée un fichier séparé : src/app/projets/metadata.js
+//     avec le contenu ci-dessous (voir fichier metadata-projets.js livré avec)
+
 const PROJECTS = [
   // ── Artistique & Événement ──
   {
@@ -43,15 +48,13 @@ const PROJECTS = [
     category: "Entreprise",
     videoId: "042b2bc38defb7830b80675fb344a7d4",
   },
-
   {
     title: "ALUMINIUM DUNKERQUE PASSION",
     category: "Entreprise",
     videoId: "e58eccbeab95ec00d15c8d3ffe4c89c0",
   },
-
   {
-    title: "lYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
+    title: "LYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
     category: "Entreprise",
     videoId: "36ebbf5575263a824e84e77e67c10830",
   },
