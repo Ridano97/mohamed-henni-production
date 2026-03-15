@@ -24,12 +24,12 @@ const PROJECTS = [
     videoId: "9fcfce68bbf6ee3323b3bea5b2267ced",
   },
   {
-    title: "DFDS LONDRES",
+    title: "DUNKERQUE PORT - DFDS LONDRES",
     category: "Entreprise",
     videoId: "5ed663c8861c674fe1e14d187589d9ef",
   },
   {
-    title: "OSAKA",
+    title: "EXPO UNIVERSELLE 2025 OSAKA x DUNKERQUE",
     category: "Entreprise",
     videoId: "8c1e109e92608a9e3e6c5c0ee861d422",
   },
@@ -70,17 +70,17 @@ const PROJECTS = [
 
   // ── Industrie ──
   {
-    title: "TOTAL IRAK",
+    title: "TOTAL ENERGIE IRAK ",
     category: "Industrie",
     videoId: "60d5e56d96a92dd2b2671bdacf8578a7",
   },
   {
-    title: "MOOC IRAK - TOTAL ENERGIES",
+    title: "MOOC TOTAL ENERGIE - IRAK",
     category: "Industrie",
     videoId: "532566ba5e337c4be840ceaf6031d55e",
   },
   {
-    title: "CHANTIER OA8",
+    title: "SUIVI OUVRAGE D'ART OA8",
     category: "Industrie",
     videoId: "838057b1b93aac767501e29a7b523d7b",
   },
@@ -90,7 +90,7 @@ const PROJECTS = [
     videoId: "2d4fce9f71c84b8223284d70178f775b",
   },
   {
-    title: "CHANTIER RIA",
+    title: "SUIVI DE CHANTIER - RIA ",
     category: "Industrie",
     videoId: "f844c9c01fe0e2cb470aea9e9d9d0274",
   },
