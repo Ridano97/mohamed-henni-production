@@ -43,13 +43,15 @@ const PROJECTS = [
     category: "Entreprise",
     videoId: "042b2bc38defb7830b80675fb344a7d4",
   },
+
   {
     title: "ALUMINIUM DUNKERQUE PASSION",
     category: "Entreprise",
     videoId: "e58eccbeab95ec00d15c8d3ffe4c89c0",
   },
+
   {
-    title: "LYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
+    title: "lYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
     category: "Entreprise",
     videoId: "36ebbf5575263a824e84e77e67c10830",
   },
@@ -99,16 +101,10 @@ const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "I
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 const CF_THUMB_BASE  = "https://videodelivery.net";
 
-const PRIORITY_COUNT = 4;
-
 export default function ProjetsPage() {
-  const [activeFilter,     setActiveFilter]     = useState("Tous");
-  const [selectedVideo,    setSelectedVideo]    = useState(null);
-  const [hoveredKey,       setHoveredKey]       = useState(null);
-  const [heroVideoLoaded,  setHeroVideoLoaded]  = useState(false);
-
-  const heroProject = PROJECTS[0];
-  const heroPoster  = `${CF_THUMB_BASE}/${heroProject.videoId}/thumbnails/thumbnail.jpg?time=2s&width=1920`;
+  const [activeFilter,  setActiveFilter]  = useState("Tous");
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [hoveredKey,    setHoveredKey]    = useState(null);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "Tous") return PROJECTS;
@@ -126,38 +122,20 @@ export default function ProjetsPage() {
     return () => { document.body.style.overflow = ""; };
   }, [selectedVideo]);
 
+  const heroProject = PROJECTS[0];
+
   return (
     <main className="projects-page">
 
       {/* ── HERO ── */}
       <section className="projects-hero">
-
-        {/* Poster — image instantanée pendant que l'iframe charge */}
-        <Image
-          src={heroPoster}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          style={{
-            objectFit: "cover",
-            objectPosition: "center",
-            opacity: heroVideoLoaded ? 0 : 1,
-            transition: "opacity 800ms ease",
-            zIndex: 0,
-          }}
-        />
-
-        {/* Vidéo hero Cloudflare */}
         <iframe
           className="projects-hero-video"
           src={`${CF_STREAM_BASE}/${heroProject.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          onLoad={() => setTimeout(() => setHeroVideoLoaded(true), 800)}
-          style={{ pointerEvents: "none", border: "none", zIndex: 1 }}
+          style={{ pointerEvents: "none", border: "none" }}
           title="Hero background video"
         />
-
         <div className="projects-hero-overlay" />
         <div className="projects-container projects-hero-container">
           <div className="projects-hero-content">
@@ -202,9 +180,8 @@ export default function ProjetsPage() {
 
           <div className="projects-grid">
             {filteredProjects.map((project, index) => {
-              const key         = `${project.videoId}-${index}`;
-              const isHovered   = hoveredKey === key;
-              const isAboveFold = index < PRIORITY_COUNT;
+              const key       = `${project.videoId}-${index}`;
+              const isHovered = hoveredKey === key;
 
               return (
                 <article key={key} className="project-card">
@@ -223,10 +200,7 @@ export default function ProjetsPage() {
                       src={`${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 900px) 100vw, 50vw"
-                      quality={75}
-                      priority={isAboveFold}
-                      loading={isAboveFold ? "eager" : "lazy"}
+                      sizes="(max-width: 900px) 100vw, 50vw"
                     />
 
                     {isHovered && (

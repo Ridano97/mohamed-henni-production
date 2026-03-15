@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import "../styles/hero.css";
 
@@ -9,18 +9,11 @@ const VIDEOS = [
   "f844c9c01fe0e2cb470aea9e9d9d0274",
   "e58eccbeab95ec00d15c8d3ffe4c89c0",
 ];
-
-// Thumbnails Cloudflare — même source que la grille projets, déjà en cache
-const POSTERS = VIDEOS.map(
-  (id) => `https://videodelivery.net/${id}/thumbnails/thumbnail.jpg?time=2s&width=1920`
-);
-
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsReady(true), 120);
@@ -30,43 +23,18 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % VIDEOS.length);
-      setVideoLoaded(false); // reset à chaque changement de vidéo
     }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section id="home" className={`hero ${isReady ? "is-ready" : ""}`}>
-
-      {/* ── Poster — s'affiche instantanément pendant que l'iframe charge ── */}
-      <Image
-        src={POSTERS[index]}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        style={{
-          objectFit: "cover",
-          objectPosition: "center",
-          opacity: videoLoaded ? 0 : 1,
-          transition: "opacity 800ms ease",
-          zIndex: 0,
-        }}
-      />
-
-      {/* ── Vidéos Cloudflare ── */}
       {VIDEOS.map((id, i) => (
         <iframe
           key={id}
           className="hero-video-bg"
           src={`${CF_STREAM_BASE}/${id}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          onLoad={() => {
-            if (i === index) {
-              // petite attente pour laisser la vidéo démarrer avant de cacher le poster
-              setTimeout(() => setVideoLoaded(true), 800);
-            }
-          }}
           style={{
             pointerEvents: "none",
             border: "none",
