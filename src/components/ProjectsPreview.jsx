@@ -57,7 +57,7 @@ export default function ProjectsPreview() {
           </div>
 
           <p className={styles.desc}>
-            Découvrez mes projets vidéo et photo réalisés pour différentes marques et entreprises.
+            Découvrez mes projets vidéos et photos réalisés pour différentes marques et entreprises.
             Cliquez sur un visuel pour parcourir l’ensemble des créations.
           </p>
         </div>

@@ -10,11 +10,13 @@ const PROJECTS = [
     title: "CROUSTY RICE",
     category: "Artistique & Événement",
     videoId: "65c69bc21b6ef2d87678af74d05083ff",
+    poster: "/posters/crousty.jpg",
   },
   {
     title: "CHAPPELLE DU PORT DUNKERQUE",
     category: "Artistique & Événement",
     videoId: "b22aef93e3b6ecb2fdabcb71bfcc45d7",
+    // pas de poster → thumbnail Cloudflare
   },
 
   // ── Entreprise ──
@@ -22,38 +24,43 @@ const PROJECTS = [
     title: "MATERNITÉ ANGÈLE BARBION",
     category: "Entreprise",
     videoId: "9fcfce68bbf6ee3323b3bea5b2267ced",
+    poster: "/posters/maternite.jpg",
   },
   {
     title: "DUNKERQUE PORT - DFDS LONDRES",
     category: "Entreprise",
     videoId: "5ed663c8861c674fe1e14d187589d9ef",
+    poster: "/posters/dfds.jpg",
   },
   {
-    title: "EXPO UNIVERSELLE 2025 OSAKA x DUNKERQUE",
+    title: "EXPOSITION UNIVERSELLE 2025 OSAKA x DUNKERQUE",
     category: "Entreprise",
     videoId: "8c1e109e92608a9e3e6c5c0ee861d422",
+    poster: "/posters/osaka.jpg",
   },
   {
     title: "THE SMILES KNOKKE",
     category: "Entreprise",
     videoId: "4e4edde0b3b29c54c0f81d53144d5ff9",
+    poster: "/posters/smile.jpg",
   },
   {
     title: "ALUMINIUM DUNKERQUE",
     category: "Entreprise",
     videoId: "042b2bc38defb7830b80675fb344a7d4",
+    // pas de poster → thumbnail Cloudflare
   },
-
   {
-    title: "ALUMINIUM DUNKERQUE PASSION",
+    title: "PASSIONS & CARRIÈRES - AD",
     category: "Entreprise",
     videoId: "e58eccbeab95ec00d15c8d3ffe4c89c0",
+    poster: "/posters/ad.jpg",
   },
-
   {
-    title: "lYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
+    title: "LYCÉE GUY DEBEYRE - ORGANISATION DU TRANSPORT",
     category: "Entreprise",
     videoId: "36ebbf5575263a824e84e77e67c10830",
+    poster: "/posters/lycee.jpg",
   },
 
   // ── Mariage ──
@@ -61,18 +68,21 @@ const PROJECTS = [
     title: "ÉLODIE & QUENTIN",
     category: "Mariage",
     videoId: "0d57fb418d859dd105c136ad07796383",
+    poster: "/posters/elodie.jpg",
   },
   {
     title: "KAMILLE & BENJAMIN",
     category: "Mariage",
     videoId: "afbc3addb86852539219d10688c6c970",
+    poster: "/posters/kamille.jpg",
   },
 
   // ── Industrie ──
   {
-    title: "TOTAL ENERGIE IRAK ",
+    title: "TOTAL ENERGIE IRAK",
     category: "Industrie",
     videoId: "60d5e56d96a92dd2b2671bdacf8578a7",
+    poster: "/posters/irak.jpg",
   },
   {
     title: "MOOC TOTAL ENERGIE - IRAK",
@@ -80,19 +90,22 @@ const PROJECTS = [
     videoId: "532566ba5e337c4be840ceaf6031d55e",
   },
   {
-    title: "SUIVI OUVRAGE D'ART OA8",
+    title: "SUIVI OUVRAGE D'ART - OA8",
     category: "Industrie",
     videoId: "838057b1b93aac767501e29a7b523d7b",
+    poster: "/posters/oa8.jpg",
   },
   {
     title: "SPIE BATIGNOLLES",
     category: "Industrie",
     videoId: "2d4fce9f71c84b8223284d70178f775b",
+    poster: "/posters/spiebatignolle.jpg",
   },
   {
-    title: "SUIVI DE CHANTIER - RIA ",
+    title: "SUIVI DE CHANTIER - RIA",
     category: "Industrie",
     videoId: "f844c9c01fe0e2cb470aea9e9d9d0274",
+    poster: "/posters/ria.jpg",
   },
 ];
 
@@ -182,6 +195,8 @@ export default function ProjetsPage() {
             {filteredProjects.map((project, index) => {
               const key       = `${project.videoId}-${index}`;
               const isHovered = hoveredKey === key;
+              const thumbSrc  = project.poster
+                ?? `${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`;
 
               return (
                 <article key={key} className="project-card">
@@ -197,7 +212,7 @@ export default function ProjetsPage() {
                   >
                     <Image
                       className="project-video"
-                      src={`${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`}
+                      src={thumbSrc}
                       alt={project.title}
                       fill
                       sizes="(max-width: 900px) 100vw, 50vw"

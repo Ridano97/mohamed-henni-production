@@ -77,8 +77,9 @@ export default function International() {
             <h3 className="country-title">IRAK</h3>
 
             <p className="country-text">
-              Installation forage <br />
-              Total Energies
+              Promotion immobilière <br />
+              Total energie <br />
+              Suivi de chantier
             </p>
           </article>
 
@@ -93,8 +94,9 @@ export default function International() {
             <h3 className="country-title">ESPAGNE</h3>
 
             <p className="country-text">
-              Compétition <br />
-              HYROX
+              Leroy Merlin <br />
+              HYROX <br />
+              Groupe ADEO
             </p>
           </article>
         </div>

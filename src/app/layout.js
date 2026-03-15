@@ -2,19 +2,19 @@ import "../styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
-
-const DOMAIN = "https://mohamed-henni-production.vercel.app"; // ← remplacer par ton domaine final
-
+ 
+const DOMAIN = "https://www.mohamedhenniproduction.com"; // ✅ DOMAINE FINAL
+ 
 export const metadata = {
   metadataBase: new URL(DOMAIN),
-
+ 
   title: {
     default: "Mohamed Henni Production | Vidéaste Dunkerque",
     template: "%s | Mohamed Henni Production",
   },
   description:
     "Vidéaste professionnel basé à Dunkerque. Productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France.",
-
+ 
   keywords: [
     "vidéaste Dunkerque",
     "production vidéo Dunkerque",
@@ -27,11 +27,11 @@ export const metadata = {
     "MHP production",
     "tournage vidéo Nord-Pas-de-Calais",
   ],
-
+ 
   authors: [{ name: "Mohamed Henni", url: DOMAIN }],
   creator: "Mohamed Henni",
   publisher: "Mohamed Henni Production",
-
+ 
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -49,7 +49,7 @@ export const metadata = {
       },
     ],
   },
-
+ 
   twitter: {
     card: "summary_large_image",
     title: "Mohamed Henni Production | Vidéaste Dunkerque",
@@ -57,7 +57,7 @@ export const metadata = {
       "Vidéaste professionnel basé à Dunkerque. Productions vidéo pour entreprises, industrie, événementiel et mariages.",
     images: ["/og-image.jpg"],
   },
-
+ 
   robots: {
     index: true,
     follow: true,
@@ -68,12 +68,12 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-
+ 
   alternates: {
     canonical: DOMAIN,
   },
 };
-
+ 
 // ── Schema.org JSON-LD — LocalBusiness ──
 const jsonLd = {
   "@context": "https://schema.org",
@@ -122,7 +122,7 @@ const jsonLd = {
     "https://fr.linkedin.com/in/mohamed-henni-630187141",
   ],
 };
-
+ 
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -132,7 +132,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
         <link rel="preconnect" href="https://iframe.cloudflarestream.com" />
         <link rel="preconnect" href="https://videodelivery.net" />
-
+ 
         {/* ── Typekit non-bloquant — fix render blocking (-710ms) ── */}
         <link
           rel="preload"
@@ -143,7 +143,7 @@ export default function RootLayout({ children }) {
         <noscript>
           <link rel="stylesheet" href="https://use.typekit.net/dtz1fkj.css" />
         </noscript>
-
+ 
         {/* ── Favicons ── */}
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -165,3 +165,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+ 

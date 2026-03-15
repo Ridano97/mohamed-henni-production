@@ -1,8 +1,8 @@
 // src/app/sitemap.js
 // Next.js génère automatiquement /sitemap.xml à partir de ce fichier
- 
-const DOMAIN = "https://mohamed-henni-production.vercel.app";
- 
+
+const DOMAIN = "https://www.mohamedhenniproduction.com"; // ✅ DOMAINE FINAL
+
 export default function sitemap() {
   return [
     {
@@ -25,4 +25,3 @@ export default function sitemap() {
     },
   ];
 }
- 

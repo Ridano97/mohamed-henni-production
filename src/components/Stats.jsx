@@ -140,7 +140,7 @@ export default function Stats() {
         </div>
 
         <div className={styles.title}>
-          REJOIGNEZ LES MARQUES QUI M’ONT FAIT CONFIANCE
+          REJOIGNEZ LES ENTREPRISES QUI NOUS ONT FAIT CONFIANCE
         </div>
       </div>
     </section>

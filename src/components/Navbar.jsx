@@ -8,7 +8,7 @@ import "../styles/navbar.css";
 const LINKS = [
   { name: "Accueil", href: "/#home" },
   { name: "À propos", href: "/#apropos" },
-  { name: "Projets & Réalisations", href: "/projets" },
+  { name: "Nos réalisations", href: "/projets" },
   { name: "Partenaires", href: "/#partenaires" },
 ];
 

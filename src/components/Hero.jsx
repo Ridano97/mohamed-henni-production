@@ -6,8 +6,6 @@ import "../styles/hero.css";
 
 const VIDEOS = [
   "60d5e56d96a92dd2b2671bdacf8578a7",
-  "f844c9c01fe0e2cb470aea9e9d9d0274",
-  "e58eccbeab95ec00d15c8d3ffe4c89c0",
 ];
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 

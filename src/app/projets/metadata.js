@@ -3,18 +3,20 @@
 //     ne peut pas exporter metadata directement.
 //     Next.js détecte automatiquement ce fichier pour la page /projets.
 
+const DOMAIN = "https://www.mohamedhenniproduction.com"; // ✅ DOMAINE FINAL
+
 export const metadata = {
   title: "Projets & Réalisations | Vidéaste Dunkerque",
   description:
     "Découvrez les réalisations vidéo de Mohamed Henni Production : films d'entreprise, vidéos industrielles pour Total et DFDS, événementiel, mariages et bien plus. Vidéaste basé à Dunkerque.",
   alternates: {
-    canonical: "https://mohamed-henni-production.vercel.app/projets",
+    canonical: `${DOMAIN}/projets`,
   },
   openGraph: {
     title: "Projets & Réalisations | Mohamed Henni Production",
     description:
       "Films d'entreprise, vidéos industrielles, événementiel, mariages. Découvrez toutes les réalisations de Mohamed Henni, vidéaste à Dunkerque.",
-    url: "https://mohamed-henni-production.vercel.app/projets",
+    url: `${DOMAIN}/projets`,
     images: [
       {
         url: "/og-image.jpg",
