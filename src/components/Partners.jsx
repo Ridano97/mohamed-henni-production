@@ -26,41 +26,29 @@ const LOGOS = [
 ];
 
 export default function Partners() {
-
-  // duplication pour créer une boucle infinie
   const track = [...LOGOS, ...LOGOS];
 
   return (
     <section className={styles.partners} id="partenaires">
-    
-
       <div className={styles.container}>
         <span className="domains-kicker">Partenaires</span>
 
         <div className={styles.marquee}>
-
           <div className={styles.track}>
-
             {track.map((logo, index) => (
               <div className={styles.logo} key={index}>
-
                 <Image
                   src={`/partners/${logo}`}
                   alt={logo}
-                  width={180}
-                  height={70}
+                  width={160}
+                  height={60}
                   className={styles.img}
                 />
-
               </div>
             ))}
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

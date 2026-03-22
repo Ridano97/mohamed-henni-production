@@ -116,8 +116,9 @@
   min-height: 52px;
   padding: 0 22px;
   border-radius: 999px;
-  background: #fff;
-  color: #000;
+  background: #E84F1B;
+  color: #fff;
+  text-decoration: none;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -131,6 +132,7 @@
 
 .projects-hero-cta:hover {
   background: #ececec;
+  color: #000;
   transform: translateY(-2px);
   box-shadow: 0 18px 36px rgba(255, 255, 255, 0.12);
 }
@@ -234,7 +236,7 @@
   box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
 }
 
-/* ================= GRID ================= */
+/* ================= GRID 16/9 ================= */
 
 .projects-grid {
   display: grid;
@@ -244,6 +246,53 @@
 
 .project-card {
   grid-column: span 6;
+}
+
+/* Les reels ne doivent jamais hériter du span 6 de la grille 16/9 */
+.project-card--reel {
+  grid-column: unset;
+}
+
+/* ================= REELS SECTION ================= */
+
+.projects-reels-section {
+  margin-top: 72px;
+}
+
+.projects-reels-heading {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 32px;
+}
+
+.projects-reels-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 34px;
+  width: 2px;
+  height: 58px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.94) 20%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
+}
+
+/* Grille reels : 4 colonnes pour afficher les formats 9/16 côte à côte */
+.projects-reels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+/* Carte reel : format vertical 9/16 — doit écraser aspect-ratio: 16/10 */
+.project-card--reel .project-media {
+  aspect-ratio: 9 / 16 !important;
+  border-radius: 20px;
 }
 
 /* ================= CARD ================= */
@@ -408,6 +457,14 @@
     box-shadow 0.24s ease;
 }
 
+/* Play plus petit sur les reels */
+.project-card--reel .project-play {
+  width: 44px;
+  height: 44px;
+  top: 14px;
+  right: 14px;
+}
+
 .project-play span {
   display: block;
   width: 0;
@@ -416,6 +473,12 @@
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   border-left: 12px solid rgba(255, 255, 255, 0.94);
+}
+
+.project-card--reel .project-play span {
+  border-top-width: 6px;
+  border-bottom-width: 6px;
+  border-left-width: 9px;
 }
 
 .project-media:hover .project-play {
@@ -439,13 +502,19 @@
   z-index: 4;
 }
 
+.project-card--reel .project-meta {
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+}
+
 .project-category {
   display: inline-flex;
   align-items: center;
   min-height: 28px;
   padding: 0 10px;
   border-radius: 999px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.14);
   font-size: 11px;
@@ -463,6 +532,12 @@
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #fff;
+}
+
+/* Titre plus petit sur les reels */
+.project-card--reel .project-title {
+  font-size: clamp(14px, 1.2vw, 18px);
+  letter-spacing: -0.02em;
 }
 
 .project-description {
@@ -493,6 +568,16 @@
 .projects-lightbox-inner {
   position: relative;
   width: min(1140px, 100%);
+}
+
+/* Lightbox verticale pour les reels */
+.projects-lightbox-inner--reel {
+  width: min(420px, 100%);
+}
+
+.projects-lightbox-inner--reel .projects-lightbox-video-wrap {
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
 }
 
 .projects-lightbox-close {
@@ -582,7 +667,7 @@
 
 @media (max-width: 900px) {
   .projects-hero {
-    min-height: 60svh;       /* ← réduit l'espace noir vs 86svh */
+    min-height: 60svh;
   }
 
   .projects-hero-container {
@@ -627,6 +712,10 @@
     top: 30px;
     height: 52px;
   }
+
+  .projects-reels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 520px) {
@@ -635,7 +724,7 @@
   }
 
   .projects-hero {
-    min-height: 55svh;       /* ← réduit l'espace noir vs 78svh */
+    min-height: 55svh;
   }
 
   .projects-hero-container {
@@ -726,6 +815,11 @@
     line-height: 1.65;
   }
 
+  .projects-reels-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
   .projects-lightbox {
     padding: 16px;
   }
@@ -738,6 +832,10 @@
 
   .projects-lightbox-video-wrap {
     border-radius: 18px;
+  }
+
+  .projects-lightbox-inner--reel {
+    width: 100%;
   }
 
   .projects-lightbox-info h3 {

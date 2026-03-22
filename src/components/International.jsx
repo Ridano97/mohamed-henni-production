@@ -78,7 +78,7 @@ export default function International() {
 
             <p className="country-text">
               Promotion immobilière <br />
-              Total energie <br />
+              TotalEnergie <br />
               Suivi de chantier
             </p>
           </article>
@@ -94,7 +94,7 @@ export default function International() {
             <h3 className="country-title">ESPAGNE</h3>
 
             <p className="country-text">
-              Leroy Merlin <br />
+              LeroyMerlin <br />
               HYROX <br />
               Groupe ADEO
             </p>

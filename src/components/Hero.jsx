@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import "../styles/hero.css";
 
 const VIDEOS = [
   "f8ba19506357ddfd00d67a01ccb08256",
 ];
+
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 
 export default function Hero() {
@@ -19,52 +19,44 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    if (VIDEOS.length <= 1) return;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % VIDEOS.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section id="home" className={`hero ${isReady ? "is-ready" : ""}`}>
-      {VIDEOS.map((id, i) => (
-        <iframe
-          key={id}
-          className="hero-video-bg"
-          src={`${CF_STREAM_BASE}/${id}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          style={{
-            pointerEvents: "none",
-            border: "none",
-            opacity: i === index ? 1 : 0,
-            transition: "opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
-            zIndex: i === index ? 0 : -1,
-          }}
-          title={`Hero video ${i + 1}`}
-        />
-      ))}
+      <div className="hero-video-stage">
+        {VIDEOS.map((id, i) => (
+          <iframe
+            key={id}
+            className={`hero-video-bg ${i === index ? "is-active" : ""}`}
+            src={`${CF_STREAM_BASE}/${id}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            title={`Hero video ${i + 1}`}
+          />
+        ))}
+      </div>
 
       <div className="hero-overlay" />
       <div className="hero-noise" />
 
       <div className="hero-container">
-        <div className="hero-logo-wrap">
-          <div className="hero-logo">
-            <Image
-              src="/Blanc2-v4.png"
-              alt="Mohamed Henni Production"
-              fill
-              priority
-              className="hero-logo-img"
-              sizes="100vw"
-            />
-          </div>
+        <div className="hero-content">
+          <h1 className="hero-title">L&apos;IMAGE AU SERVICE DE VOS ENJEUX</h1>
+          <p className="hero-description">
+            Je transforme votre expertise en contenu qui performe.
+          </p>
         </div>
-
-        <p className="hero-subtitle">
-          VIDÉASTE • INDUSTRIE • ÉVÉNEMENTIEL • MARIAGE
-        </p>
       </div>
+
+      <p className="hero-categories">
+        CORPORATE • INDUSTRIE • CHANTIER • ÉVÉNEMENTIEL • MARIAGE
+      </p>
     </section>
   );
 }

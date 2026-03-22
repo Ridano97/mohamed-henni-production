@@ -16,7 +16,26 @@ const PROJECTS = [
     title: "CHAPPELLE DU PORT DUNKERQUE",
     category: "Artistique & Événement",
     videoId: "b22aef93e3b6ecb2fdabcb71bfcc45d7",
-    // pas de poster → thumbnail Cloudflare
+  },
+  {
+    title: "ONE MAN CONF WAYTA",
+    category: "Artistique & Événement",
+    videoId: "710f90400fcafb2b9e1ccc1b248390e9",
+  },
+  {
+    title: "AETE 2024",
+    category: "Artistique & Événement",
+    videoId: "3173eef0eed308ea59404d26bf5d4f6f",
+  },
+  {
+    title: "SPOT CINEMA MHP X WAYTA",
+    category: "Artistique & Événement",
+    videoId: "3e9b2cf49d44b7a83a4aead7d6103e24",
+  },
+  {
+    title: "JE DIS ÇA JE DIS RIEN",
+    category: "Artistique & Événement",
+    videoId: "cdab02cf2cfbec3c07b0076ea166d342",
   },
 
   // ── Entreprise ──
@@ -48,7 +67,6 @@ const PROJECTS = [
     title: "ALUMINIUM DUNKERQUE",
     category: "Entreprise",
     videoId: "042b2bc38defb7830b80675fb344a7d4",
-    // pas de poster → thumbnail Cloudflare
   },
   {
     title: "PASSIONS & CARRIÈRES - AD",
@@ -61,6 +79,41 @@ const PROJECTS = [
     category: "Entreprise",
     videoId: "36ebbf5575263a824e84e77e67c10830",
     poster: "/posters/lycee.jpg",
+  },
+  {
+    title: "ACTENIUM",
+    category: "Entreprise",
+    videoId: "8eefade624abee4261c5be4b4707bff4",
+  },
+  {
+    title: "CLYDE DRIVING SCHOOL",
+    category: "Entreprise",
+    videoId: "64275e57f639a6c1bc6ebf5cc208cd12",
+  },
+  {
+    title: "VERKOR JOB DATING",
+    category: "Entreprise",
+    videoId: "c8fec10f6b0adafcdcbbee04ed55aaa9",
+  },
+  {
+    title: "NOUVELLE CONCESSION BMW",
+    category: "Entreprise",
+    videoId: "1a5deaf910913c601d8cd1c92171df74",
+  },
+  {
+    title: "COOL LOGISTICS",
+    category: "Entreprise",
+    videoId: "e08c088f5acdfd2c0f18843bfb6612ac",
+  },
+  {
+    title: "BIKOQUE IMMOBILIER",
+    category: "Entreprise",
+    videoId: "8ca19b1c9ff296683d83ae5b3a48cd99",
+  },
+  {
+    title: "SUBTIL STORE",
+    category: "Entreprise",
+    videoId: "3ee667273fc29349452ab7ec4b340b86",
   },
 
   // ── Mariage ──
@@ -75,6 +128,16 @@ const PROJECTS = [
     category: "Mariage",
     videoId: "afbc3addb86852539219d10688c6c970",
     poster: "/posters/kamille.jpg",
+  },
+  {
+    title: "SINDY & MEHDI",
+    category: "Mariage",
+    videoId: "56efbe40b60c6318fddbaa10ed8731e0",
+  },
+  {
+    title: "MARIAGE MAEVA",
+    category: "Mariage",
+    videoId: "632809459665d18ade50448833b4286a",
   },
 
   // ── Industrie ──
@@ -107,9 +170,40 @@ const PROJECTS = [
     videoId: "f844c9c01fe0e2cb470aea9e9d9d0274",
     poster: "/posters/ria.jpg",
   },
+  {
+    title: "EVA CLEMENT - OPÉRATRICE TOTALÉNERGIE",
+    category: "Industrie",
+    videoId: "85f1a262eb9ef5c4e086c328a8fc0ca0",
+  },
+
+  // ── Reels ──
+  {
+    title: "CONCOURS MHP",
+    category: "Reels",
+    videoId: "1e6050d39975e9281c87eadc32421335",
+    reel: true,
+  },
+  {
+    title: "SEL & MIEL",
+    category: "Reels",
+    videoId: "febdbadaa21eea9aaac6c067a55969a3",
+    reel: true,
+  },
+  {
+    title: "PATES TIMES",
+    category: "Reels",
+    videoId: "91dcfb7c3ab044b9fb0667946904e229",
+    reel: true,
+  },
+  {
+    title: "OFFICE DE TOURISME JURA",
+    category: "Reels",
+    videoId: "578aa6c480b7db6b0cfba79e88a939d3",
+    reel: true,
+  },
 ];
 
-const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "Industrie"];
+const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "Industrie", "Reels"];
 
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
 const CF_THUMB_BASE  = "https://videodelivery.net";
@@ -124,6 +218,14 @@ export default function ProjetsPage() {
     return PROJECTS.filter((p) => p.category === activeFilter);
   }, [activeFilter]);
 
+  const standardProjects = useMemo(() =>
+    filteredProjects.filter((p) => !p.reel), [filteredProjects]);
+
+  const reelProjects = useMemo(() =>
+    filteredProjects.filter((p) => p.reel), [filteredProjects]);
+
+  const showReels = reelProjects.length > 0;
+
   useEffect(() => {
     const onKey = (e) => { if (e.key === "Escape") setSelectedVideo(null); };
     window.addEventListener("keydown", onKey);
@@ -136,6 +238,55 @@ export default function ProjetsPage() {
   }, [selectedVideo]);
 
   const heroProject = PROJECTS[0];
+
+  const renderCard = (project, index) => {
+    const key       = `${project.videoId}-${index}`;
+    const isHovered = hoveredKey === key;
+    const thumbSrc  = project.poster
+      ?? `${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`;
+
+    return (
+      <article key={key} className={`project-card${project.reel ? " project-card--reel" : ""}`}>
+        <button
+          type="button"
+          className="project-media"
+          onClick={() => setSelectedVideo(project)}
+          onMouseEnter={() => setHoveredKey(key)}
+          onMouseLeave={() => setHoveredKey(null)}
+          onFocus={() => setHoveredKey(key)}
+          onBlur={() => setHoveredKey(null)}
+          aria-label={`Ouvrir ${project.title}`}
+        >
+          <Image
+            className="project-video"
+            src={thumbSrc}
+            alt={project.title}
+            fill
+            sizes={project.reel
+              ? "(max-width: 600px) 50vw, 25vw"
+              : "(max-width: 900px) 100vw, 50vw"}
+          />
+
+          {isHovered && (
+            <iframe
+              className="project-video project-video-hover"
+              src={`${CF_STREAM_BASE}/${project.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              style={{ pointerEvents: "none", border: "none", position: "absolute", inset: 0 }}
+              title={project.title}
+            />
+          )}
+
+          <div className="project-overlay" />
+          <div className="project-play"><span /></div>
+          <div className="project-meta">
+            <span className="project-category">{project.category}</span>
+            <h3 className="project-title">{project.title}</h3>
+          </div>
+        </button>
+      </article>
+    );
+  };
 
   return (
     <main className="projects-page">
@@ -191,55 +342,27 @@ export default function ProjetsPage() {
             </div>
           </div>
 
-          <div className="projects-grid">
-            {filteredProjects.map((project, index) => {
-              const key       = `${project.videoId}-${index}`;
-              const isHovered = hoveredKey === key;
-              const thumbSrc  = project.poster
-                ?? `${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`;
+          {/* Vidéos classiques 16/9 */}
+          {standardProjects.length > 0 && (
+            <div className="projects-grid">
+              {standardProjects.map((project, index) => renderCard(project, index))}
+            </div>
+          )}
 
-              return (
-                <article key={key} className="project-card">
-                  <button
-                    type="button"
-                    className="project-media"
-                    onClick={() => setSelectedVideo(project)}
-                    onMouseEnter={() => setHoveredKey(key)}
-                    onMouseLeave={() => setHoveredKey(null)}
-                    onFocus={() => setHoveredKey(key)}
-                    onBlur={() => setHoveredKey(null)}
-                    aria-label={`Ouvrir ${project.title}`}
-                  >
-                    <Image
-                      className="project-video"
-                      src={thumbSrc}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 50vw"
-                    />
-
-                    {isHovered && (
-                      <iframe
-                        className="project-video project-video-hover"
-                        src={`${CF_STREAM_BASE}/${project.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        style={{ pointerEvents: "none", border: "none", position: "absolute", inset: 0 }}
-                        title={project.title}
-                      />
-                    )}
-
-                    <div className="project-overlay" />
-                    <div className="project-play"><span /></div>
-                    <div className="project-meta">
-                      <span className="project-category">{project.category}</span>
-                      <h3 className="project-title">{project.title}</h3>
-                      <p className="project-description">{project.description}</p>
-                    </div>
-                  </button>
-                </article>
-              );
-            })}
-          </div>
+          {/* Section Reels 9/16 */}
+          {showReels && (
+            <div className="projects-reels-section">
+              {activeFilter === "Tous" && (
+                <div className="projects-reels-heading">
+                  <span className="projects-kicker">Format vertical</span>
+                  <h2 className="projects-section-title">Reels &amp; Formats Courts</h2>
+                </div>
+              )}
+              <div className="projects-reels-grid">
+                {reelProjects.map((project, index) => renderCard(project, index + 1000))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -252,7 +375,10 @@ export default function ProjetsPage() {
           aria-label={selectedVideo.title}
           onClick={() => setSelectedVideo(null)}
         >
-          <div className="projects-lightbox-inner" onClick={(e) => e.stopPropagation()}>
+          <div
+            className={`projects-lightbox-inner${selectedVideo.reel ? " projects-lightbox-inner--reel" : ""}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               className="projects-lightbox-close"
@@ -274,7 +400,6 @@ export default function ProjetsPage() {
             <div className="projects-lightbox-info">
               <span className="project-category">{selectedVideo.category}</span>
               <h3>{selectedVideo.title}</h3>
-              <p>{selectedVideo.description}</p>
             </div>
           </div>
         </div>

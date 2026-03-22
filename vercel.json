@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mohamed-henni-production.vercel.app"
+        }
+      ],
+      "destination": "https://www.mohamedhenniproduction.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mohamedhenniproduction.com"
+        }
+      ],
+      "destination": "https://www.mohamedhenniproduction.com/$1",
+      "permanent": true
+    }
+  ]
+}

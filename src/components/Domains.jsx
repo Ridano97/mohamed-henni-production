@@ -53,6 +53,121 @@ function HelmetIcon() {
   );
 }
 
+function CorporateIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="domain-svg" aria-hidden="true">
+      <rect
+        x="3" y="7" width="18" height="13"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 13h18"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M10 13v2m4-2v2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function EventIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="domain-svg" aria-hidden="true">
+      <path
+        d="M9 18V6l12 6-12 6Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 6v12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function WeddingIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="domain-svg" aria-hidden="true">
+      <path
+        d="M12 21C12 21 4 15.5 4 9.5a4.5 4.5 0 0 1 8-2.83A4.5 4.5 0 0 1 20 9.5C20 15.5 12 21 12 21Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 6V3M10 4h4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+const cards = [
+  {
+    color: "domain-orange",
+    delay: "160ms",
+    icon: <FactoryIcon />,
+    title: "Vidéo Corporate & Industrielle",
+    text: "Films institutionnels, formation sécurité, présentation de processus industriels et communication interne.",
+  },
+  {
+    color: "domain-grey",
+    delay: "280ms",
+    icon: <HelmetIcon />,
+    title: "Suivi de Chantier",
+    text: "Timelapse longue durée, inspection par drone et documentation technique de l'évolution des travaux.",
+  },
+  {
+    color: "domain-navy",
+    delay: "400ms",
+    icon: <CorporateIcon />,
+    title: "Corporate",
+    text: "Films institutionnels, reportages d'entreprise, clips de communication interne ou externe — nous transformons votre vision en contenu vidéo professionnel qui inspire.",
+  },
+  {
+    color: "domain-orange",
+    delay: "520ms",
+    icon: <EventIcon />,
+    title: "Événementiel & Artistique",
+    text: "Concerts, spectacles, soirées de gala ou lancements de produit — des captations dynamiques et des aftermovies cinématographiques qui font revivre chaque moment.",
+  },
+  {
+    color: "domain-grey",
+    delay: "640ms",
+    icon: <WeddingIcon />,
+    title: "Mariage",
+    text: "Votre mariage est unique, votre film doit l'être aussi. Avec une approche douce, discrète et profondément humaine, nous capturons chaque regard, chaque rire et chaque émotion.",
+  },
+];
+
 export default function Domains() {
   const rootRef = useRef(null);
 
@@ -97,44 +212,40 @@ export default function Domains() {
           </p>
         </div>
 
-        <div className="domains-grid">
-          <article
-            className="domain-card domain-orange"
-            data-reveal
-            style={{ transitionDelay: "160ms" }}
-          >
-            <div className="domain-glow" />
+        <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          {/* Ligne 1 : 3 cartes */}
+          <div className="domains-grid-row">
+            {cards.slice(0, 3).map((card, i) => (
+              <article
+                key={i}
+                className={`domain-card ${card.color}`}
+                data-reveal
+                style={{ transitionDelay: card.delay }}
+              >
+                <div className="domain-glow" />
+                <div className="domain-icon-wrap">{card.icon}</div>
+                <h3 className="domain-title">{card.title}</h3>
+                <p className="domain-text">{card.text}</p>
+              </article>
+            ))}
+          </div>
 
-            <div className="domain-icon-wrap">
-              <FactoryIcon />
-            </div>
-
-            <h3 className="domain-title">Vidéo Corporate &amp; Industrielle</h3>
-
-            <p className="domain-text">
-              Films institutionnels, formation sécurité, présentation de
-              processus industriels et communication interne.
-            </p>
-          </article>
-
-          <article
-            className="domain-card domain-grey"
-            data-reveal
-            style={{ transitionDelay: "340ms" }}
-          >
-            <div className="domain-glow" />
-
-            <div className="domain-icon-wrap">
-              <HelmetIcon />
-            </div>
-
-            <h3 className="domain-title">Suivi de Chantier</h3>
-
-            <p className="domain-text">
-              Timelapse longue durée, inspection par drone et documentation
-              technique de l’évolution des travaux.
-            </p>
-          </article>
+          {/* Ligne 2 : 2 cartes centrées */}
+          <div className="domains-grid-row domains-grid-row--centered">
+            {cards.slice(3).map((card, i) => (
+              <article
+                key={i + 3}
+                className={`domain-card ${card.color}`}
+                data-reveal
+                style={{ transitionDelay: card.delay }}
+              >
+                <div className="domain-glow" />
+                <div className="domain-icon-wrap">{card.icon}</div>
+                <h3 className="domain-title">{card.title}</h3>
+                <p className="domain-text">{card.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

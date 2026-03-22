@@ -1,161 +1,144 @@
-.partners{
-background:#ffffff;
-padding:90px 0;
+.partners {
+  background: #ffffff;
+  padding: 90px 0;
 }
 
-.container{
-max-width:1200px;
-margin:0 auto;
-padding:0 28px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px;
 }
 
 /* MARQUEE */
 
-.marquee{
-position:relative;
-overflow:hidden;
-
-border-radius:18px;
-
-background:linear-gradient(180deg,#ffffff,#fafafa);
-
-border:1px solid rgba(0,0,0,0.05);
-
-box-shadow:0 20px 60px rgba(0,0,0,0.07);
+.marquee {
+  position: relative;
+  overflow: hidden;
+  margin-top: 24px;
 }
 
 /* FADE EDGES */
 
 .marquee::before,
-.marquee::after{
-content:"";
-position:absolute;
-top:0;
-width:120px;
-height:100%;
-z-index:2;
-pointer-events:none;
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.marquee::before{
-left:0;
-background:linear-gradient(to right,#ffffff,transparent);
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff, transparent);
 }
 
-.marquee::after{
-right:0;
-background:linear-gradient(to left,#ffffff,transparent);
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff, transparent);
 }
 
 /* TRACK */
 
-.track{
-display:flex;
-align-items:center;
-gap:32px;
+.track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
 
-width:max-content;
+  width: max-content;
+  padding: 20px 0;
 
-padding:26px;
-
-animation:scroll 32s linear infinite;
+  animation: scroll 32s linear infinite;
 }
 
 /* PAUSE AU HOVER */
 
-.marquee:hover .track{
-animation-play-state:paused;
+.marquee:hover .track {
+  animation-play-state: paused;
 }
 
-/* LOGO CARD */
+/* LOGO */
 
-.logo{
-width:200px;
-height:80px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-border-radius:14px;
-
-background:rgba(255,255,255,0.9);
-
-border:1px solid rgba(0,0,0,0.05);
-
-transition:
-transform .25s ease,
-box-shadow .25s ease;
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 90px;
+  padding: 0 8px;
+  flex-shrink: 0;
 }
 
-.img{
-width:auto;
-height:48px;
+/* IMAGE
+   On normalise par la largeur du conteneur.
+   Les logos larges (Adeo, Arcelor) remplissent la largeur.
+   Les logos carrés (Decathlon) sont contraints par max-height.
+*/
 
-object-fit:contain;
+.img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 72px;
+  object-fit: contain;
+  opacity: 0.72;
+  filter: grayscale(20%);
 
-transition:transform .25s ease;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 280ms ease,
+    filter 280ms ease;
 }
 
 /* HOVER */
 
-.logo:hover{
-transform:translateY(-4px);
-
-box-shadow:0 18px 40px rgba(0,0,0,0.12);
-}
-
-.logo:hover .img{
-transform:scale(1.05);
+.logo:hover .img {
+  transform: scale(1.12);
+  opacity: 1;
+  filter: grayscale(0%);
 }
 
 /* ANIMATION */
 
-@keyframes scroll{
-
-from{
-transform:translateX(0);
-}
-
-to{
-transform:translateX(-50%);
-}
-
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* RESPONSIVE */
 
-@media (max-width:900px){
+@media (max-width: 900px) {
+  .track {
+    gap: 32px;
+    animation-duration: 36s;
+  }
 
-.track{
-gap:22px;
-animation-duration:36s;
+  .logo {
+    width: 120px;
+    height: 60px;
+  }
+
+  .img {
+    max-height: 46px;
+  }
 }
 
-.logo{
-width:160px;
-height:70px;
-}
+@media (max-width: 480px) {
+  .track {
+    gap: 24px;
+  }
 
-.img{
-height:42px;
-}
+  .logo {
+    width: 100px;
+    height: 50px;
+  }
 
-}
-
-@media (max-width:480px){
-
-.logo{
-width:140px;
-height:65px;
-}
-
-.img{
-height:36px;
-}
-
-.track{
-gap:18px;
-}
-
+  .img {
+    max-height: 38px;
+  }
 }

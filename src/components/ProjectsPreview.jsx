@@ -14,7 +14,7 @@ const PHOTOS = [
   "/projects/photo5.jpg",
   "/projects/photo7.jpg",
   "/projects/photo8.jpg",
-  "/projects/photo9.jpg",
+  "/projects/soudure.jpg",
   "/projects/photo10.jpg",
 ];
 
@@ -51,15 +51,31 @@ export default function ProjectsPreview() {
         <div className={styles.header} data-reveal>
           <div className={styles.leftTitle}>
             <div className={styles.bar} />
-            <h2 className={styles.h2}>
-              De La Vision <br /> À L’Image
-            </h2>
+            <div>
+              <span className={styles.kicker}>Réalisations</span>
+              <h2 className={styles.h2}>
+                De La Vision <br /> À L&apos;Image
+              </h2>
+            </div>
           </div>
 
-          <p className={styles.desc}>
-            Découvrez mes projets vidéos et photos réalisés pour différentes marques et entreprises.
-            Cliquez sur un visuel pour parcourir l’ensemble des créations.
-          </p>
+          <div className={styles.descBlock}>
+            <p className={styles.desc}>
+              Découvrez mes projets vidéos et photos réalisés pour différentes marques et entreprises.
+            </p>
+            <Link href="/projets" className={styles.btn}>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M8 5v14l11-7L8 5z" />
+              </svg>
+              Nos réalisations
+            </Link>
+          </div>
         </div>
 
         <div className={styles.grid}>
