@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
+import { SpeedInsights } from "@vercel/speed-insights/next";
  
 const DOMAIN = "https://www.mohamedhenniproduction.com";
  
@@ -9,11 +10,11 @@ export const metadata = {
   metadataBase: new URL(DOMAIN),
  
   title: {
-    default: "Mohamed Henni Production | Vidéaste Dunkerque",
+    default: "Mohamed Henni Production | Vidéaste & Réalisateur Dunkerque",
     template: "%s | Mohamed Henni Production",
   },
   description:
-    "Vidéaste professionnel basé à Dunkerque. Productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France.",
+    "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France. Contactez-nous.",
  
   keywords: [
     "vidéaste Dunkerque",
@@ -37,25 +38,25 @@ export const metadata = {
     locale: "fr_FR",
     url: DOMAIN,
     siteName: "Mohamed Henni Production",
-    title: "Mohamed Henni Production | Vidéaste Dunkerque",
+    title: "Mohamed Henni Production | Vidéaste & Réalisateur Dunkerque",
     description:
-      "Vidéaste professionnel basé à Dunkerque. Productions vidéo pour entreprises, industrie, événementiel et mariages.",
+      "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: `${DOMAIN}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "Mohamed Henni Production – Vidéaste Dunkerque",
+        alt: "Mohamed Henni Production – Vidéaste & Réalisateur Dunkerque",
       },
     ],
   },
  
   twitter: {
     card: "summary_large_image",
-    title: "Mohamed Henni Production | Vidéaste Dunkerque",
+    title: "Mohamed Henni Production | Vidéaste & Réalisateur Dunkerque",
     description:
-      "Vidéaste professionnel basé à Dunkerque. Productions vidéo pour entreprises, industrie, événementiel et mariages.",
-    images: ["/og-image.jpg"],
+      "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France.",
+    images: [`${DOMAIN}/og-image.jpg`],
   },
  
   robots: {
@@ -172,6 +173,7 @@ export default function RootLayout({ children }) {
         <main style={{ paddingTop: "80px" }}>{children}</main>
         <ScrollTop />
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );

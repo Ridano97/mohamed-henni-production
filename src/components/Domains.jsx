@@ -135,7 +135,7 @@ const cards = [
     color: "domain-orange",
     delay: "160ms",
     icon: <FactoryIcon />,
-    title: "Vidéo Corporate & Industrielle",
+    title: "Industrielle",
     text: "Films institutionnels, formation sécurité, présentation de processus industriels et communication interne.",
   },
   {

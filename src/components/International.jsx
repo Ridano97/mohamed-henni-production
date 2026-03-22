@@ -78,7 +78,7 @@ export default function International() {
 
             <p className="country-text">
               Promotion immobilière <br />
-              TotalEnergie <br />
+              TotalEnergies <br />
               Suivi de chantier
             </p>
           </article>

@@ -18,7 +18,7 @@ const PROJECTS = [
     videoId: "b22aef93e3b6ecb2fdabcb71bfcc45d7",
   },
   {
-    title: "ONE MAN CONF WAYTA",
+    title: "Oneman Confshow - Wayta",
     category: "Artistique & Événement",
     videoId: "710f90400fcafb2b9e1ccc1b248390e9",
   },
@@ -96,12 +96,12 @@ const PROJECTS = [
     videoId: "c8fec10f6b0adafcdcbbee04ed55aaa9",
   },
   {
-    title: "NOUVELLE CONCESSION BMW",
+    title: "Concession BMW - GROUPE LEMPEREUR",
     category: "Entreprise",
     videoId: "1a5deaf910913c601d8cd1c92171df74",
   },
   {
-    title: "COOL LOGISTICS",
+    title: "SPOT PUBLICITAIRE - COOL LOGISTICS",
     category: "Entreprise",
     videoId: "e08c088f5acdfd2c0f18843bfb6612ac",
   },
@@ -135,20 +135,20 @@ const PROJECTS = [
     videoId: "56efbe40b60c6318fddbaa10ed8731e0",
   },
   {
-    title: "MARIAGE MAEVA",
+    title: "MAEVA & RYAN",
     category: "Mariage",
     videoId: "632809459665d18ade50448833b4286a",
   },
 
   // ── Industrie ──
   {
-    title: "TOTAL ENERGIE IRAK",
+    title: "TOTALENERGIES IRAK",
     category: "Industrie",
     videoId: "60d5e56d96a92dd2b2671bdacf8578a7",
     poster: "/posters/irak.jpg",
   },
   {
-    title: "MOOC TOTAL ENERGIE - IRAK",
+    title: "MOOC TOTALENERGIES - IRAK",
     category: "Industrie",
     videoId: "532566ba5e337c4be840ceaf6031d55e",
   },
