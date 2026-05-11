@@ -9,14 +9,20 @@ const nextConfig = {
 
   // ✅ AJOUT 1 — Redirections : non-www → www
   async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'mohamedhenniproduction.com' }],
-        destination: 'https://www.mohamedhenniproduction.com/:path*',
-        permanent: true,
-      },
-    ];
+      return [
+        {
+          source: '/:path*',
+          has: [{ type: 'host', value: 'mohamedhenniproduction.com' }],
+          destination: 'https://www.mohamedhenniproduction.com/:path*',
+          permanent: true,
+        },
+        {
+          source: '/:path*',
+          has: [{ type: 'host', value: 'mohamed-henni-production.vercel.app' }],
+          destination: 'https://www.mohamedhenniproduction.com/:path*',
+          permanent: true,
+        },
+      ];
   },
 
   turbopack: {
