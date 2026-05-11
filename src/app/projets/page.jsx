@@ -37,6 +37,11 @@ const PROJECTS = [
     category: "Artistique & Événement",
     videoId: "cdab02cf2cfbec3c07b0076ea166d342",
   },
+  {
+    title: "TEASER EMMANUEL CHILA",
+    category: "Artistique & Événement",
+    videoId: "92490053182f121bb108fa40ae0667f3",
+  },
 
   // ── Entreprise ──
   {
@@ -115,6 +120,11 @@ const PROJECTS = [
     category: "Entreprise",
     videoId: "3ee667273fc29349452ab7ec4b340b86",
   },
+  {
+    title: "OMRA 2026",
+    category: "Entreprise",
+    videoId: "2f1018cfa9e8e0c9f4bac5d8d3b77289",
+  },
 
   // ── Mariage ──
   {
@@ -175,6 +185,11 @@ const PROJECTS = [
     category: "Industrie",
     videoId: "85f1a262eb9ef5c4e086c328a8fc0ca0",
   },
+  {
+    title: "LOMBARD MOUGENOT",
+    category: "Industrie",
+    videoId: "6762d7ff55cb6a4eace6d7c2fae53641",
+  },
 
   // ── Reels ──
   {
@@ -201,52 +216,110 @@ const PROJECTS = [
     videoId: "578aa6c480b7db6b0cfba79e88a939d3",
     reel: true,
   },
+  {
+    title: "SARAH CAUX PILATES",
+    category: "Reels",
+    videoId: "894b5cb03ba24a44b3f496ef449f8954",
+    reel: true,
+  },
+  {
+    title: "ALLEZ VOUS FAIRE COMMUNIQUER",
+    category: "Reels",
+    videoId: "3e69dbd036cd5bd22db66e5878124716",
+    reel: true,
+  },
+  {
+    title: "MADROOM DK",
+    category: "Reels",
+    videoId: "1b7ef1162e623a12ad99e428967b0b05",
+    reel: true,
+  },
+  {
+    title: "LES PÉTILLANTES",
+    category: "Reels",
+    videoId: "9beea04d4cadca829ddc9e04318fb4d2",
+    reel: true,
+  },
+  {
+    title: "DIMITRI",
+    category: "Reels",
+    videoId: "f8137fe9810e33e9a845e23894610fd8",
+    reel: true,
+  },
 ];
 
-const FILTERS = ["Tous", "Artistique & Événement", "Entreprise", "Mariage", "Industrie", "Reels"];
+const FILTERS = [
+  "Tous",
+  "Artistique & Événement",
+  "Entreprise",
+  "Mariage",
+  "Industrie",
+  "Reels",
+];
 
 const CF_STREAM_BASE = "https://iframe.cloudflarestream.com";
-const CF_THUMB_BASE  = "https://videodelivery.net";
+const CF_THUMB_BASE = "https://videodelivery.net";
 
 export default function ProjetsPage() {
-  const [activeFilter,  setActiveFilter]  = useState("Tous");
+  const [activeFilter, setActiveFilter] = useState("Tous");
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [hoveredKey,    setHoveredKey]    = useState(null);
+  const [hoveredKey, setHoveredKey] = useState(null);
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "Tous") return PROJECTS;
     return PROJECTS.filter((p) => p.category === activeFilter);
   }, [activeFilter]);
 
-  const standardProjects = useMemo(() =>
-    filteredProjects.filter((p) => !p.reel), [filteredProjects]);
+  const standardProjects = useMemo(
+    () => filteredProjects.filter((p) => !p.reel),
+    [filteredProjects]
+  );
 
-  const reelProjects = useMemo(() =>
-    filteredProjects.filter((p) => p.reel), [filteredProjects]);
+  const reelProjects = useMemo(
+    () => filteredProjects.filter((p) => p.reel),
+    [filteredProjects]
+  );
+
+  const carouselReelProjects = useMemo(() => {
+    if (reelProjects.length === 0) return [];
+    return [...reelProjects, ...reelProjects];
+  }, [reelProjects]);
 
   const showReels = reelProjects.length > 0;
 
   useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") setSelectedVideo(null); };
+    const onKey = (e) => {
+      if (e.key === "Escape") setSelectedVideo(null);
+    };
+
     window.addEventListener("keydown", onKey);
+
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = selectedVideo ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [selectedVideo]);
 
   const heroProject = PROJECTS[0];
 
   const renderCard = (project, index) => {
-    const key       = `${project.videoId}-${index}`;
+    const key = `${project.videoId}-${index}`;
     const isHovered = hoveredKey === key;
-    const thumbSrc  = project.poster
-      ?? `${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`;
+
+    const thumbSrc =
+      project.poster ??
+      `${CF_THUMB_BASE}/${project.videoId}/thumbnails/thumbnail.jpg?time=2s&width=800`;
 
     return (
-      <article key={key} className={`project-card${project.reel ? " project-card--reel" : ""}`}>
+      <article
+        key={key}
+        className={`project-card${project.reel ? " project-card--reel" : ""}`}
+      >
         <button
           type="button"
           className="project-media"
@@ -262,9 +335,11 @@ export default function ProjetsPage() {
             src={thumbSrc}
             alt={project.title}
             fill
-            sizes={project.reel
-              ? "(max-width: 600px) 50vw, 25vw"
-              : "(max-width: 900px) 100vw, 50vw"}
+            sizes={
+              project.reel
+                ? "(max-width: 600px) 50vw, 25vw"
+                : "(max-width: 900px) 100vw, 50vw"
+            }
           />
 
           {isHovered && (
@@ -272,13 +347,22 @@ export default function ProjetsPage() {
               className="project-video project-video-hover"
               src={`${CF_STREAM_BASE}/${project.videoId}?autoplay=true&muted=true&loop=true&controls=false&preload=true`}
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              style={{ pointerEvents: "none", border: "none", position: "absolute", inset: 0 }}
+              style={{
+                pointerEvents: "none",
+                border: "none",
+                position: "absolute",
+                inset: 0,
+              }}
               title={project.title}
             />
           )}
 
           <div className="project-overlay" />
-          <div className="project-play"><span /></div>
+
+          <div className="project-play">
+            <span />
+          </div>
+
           <div className="project-meta">
             <span className="project-category">{project.category}</span>
             <h3 className="project-title">{project.title}</h3>
@@ -290,7 +374,6 @@ export default function ProjetsPage() {
 
   return (
     <main className="projects-page">
-
       {/* ── HERO ── */}
       <section className="projects-hero">
         <iframe
@@ -300,17 +383,23 @@ export default function ProjetsPage() {
           style={{ pointerEvents: "none", border: "none" }}
           title="Hero background video"
         />
+
         <div className="projects-hero-overlay" />
+
         <div className="projects-container projects-hero-container">
           <div className="projects-hero-content">
             <span className="projects-kicker">Réalisations</span>
+
             <h1 className="projects-title">
               De La Vision <br />À L&apos;Image
             </h1>
+
             <p className="projects-intro">
               Découvrez une sélection de productions vidéo conçues pour la
-              marque, l&apos;entreprise, l&apos;événementiel et les univers exigeants.
+              marque, l&apos;entreprise, l&apos;événementiel et les univers
+              exigeants.
             </p>
+
             <a href="#projects-grid" className="projects-hero-cta">
               Voir les projets
             </a>
@@ -324,15 +413,21 @@ export default function ProjetsPage() {
           <div className="projects-section-heading">
             <div className="projects-heading">
               <span className="projects-kicker">Sélection</span>
-              <h2 className="projects-section-title">Projets &amp; Réalisations</h2>
+
+              <h2 className="projects-section-title">
+                Projets &amp; Réalisations
+              </h2>
             </div>
+
             <div className="projects-toolbar">
               <div className="projects-filters" aria-label="Filtres projets">
                 {FILTERS.map((filter) => (
                   <button
                     key={filter}
                     type="button"
-                    className={`projects-filter ${activeFilter === filter ? "is-active" : ""}`}
+                    className={`projects-filter ${
+                      activeFilter === filter ? "is-active" : ""
+                    }`}
                     onClick={() => setActiveFilter(filter)}
                   >
                     {filter}
@@ -345,21 +440,30 @@ export default function ProjetsPage() {
           {/* Vidéos classiques 16/9 */}
           {standardProjects.length > 0 && (
             <div className="projects-grid">
-              {standardProjects.map((project, index) => renderCard(project, index))}
+              {standardProjects.map((project, index) =>
+                renderCard(project, index)
+              )}
             </div>
           )}
 
-          {/* Section Reels 9/16 */}
+          {/* Section Reels carousel 9/16 */}
           {showReels && (
             <div className="projects-reels-section">
               {activeFilter === "Tous" && (
                 <div className="projects-reels-heading">
                   <span className="projects-kicker">Format vertical</span>
-                  <h2 className="projects-section-title">Reels &amp; Formats Courts</h2>
+                  <h2 className="projects-section-title">
+                    Reels &amp; Formats Courts
+                  </h2>
                 </div>
               )}
-              <div className="projects-reels-grid">
-                {reelProjects.map((project, index) => renderCard(project, index + 1000))}
+
+              <div className="projects-reels-carousel">
+                <div className="projects-reels-track">
+                  {carouselReelProjects.map((project, index) =>
+                    renderCard(project, index + 1000)
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -376,7 +480,9 @@ export default function ProjetsPage() {
           onClick={() => setSelectedVideo(null)}
         >
           <div
-            className={`projects-lightbox-inner${selectedVideo.reel ? " projects-lightbox-inner--reel" : ""}`}
+            className={`projects-lightbox-inner${
+              selectedVideo.reel ? " projects-lightbox-inner--reel" : ""
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -385,8 +491,10 @@ export default function ProjetsPage() {
               aria-label="Fermer la vidéo"
               onClick={() => setSelectedVideo(null)}
             >
-              <span /><span />
+              <span />
+              <span />
             </button>
+
             <div className="projects-lightbox-video-wrap">
               <iframe
                 className="projects-lightbox-video"
@@ -397,6 +505,7 @@ export default function ProjetsPage() {
                 title={selectedVideo.title}
               />
             </div>
+
             <div className="projects-lightbox-info">
               <span className="project-category">{selectedVideo.category}</span>
               <h3>{selectedVideo.title}</h3>
@@ -404,7 +513,6 @@ export default function ProjetsPage() {
           </div>
         </div>
       )}
-
     </main>
   );
 }

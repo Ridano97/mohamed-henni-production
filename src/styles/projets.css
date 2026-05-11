@@ -248,15 +248,15 @@
   grid-column: span 6;
 }
 
-/* Les reels ne doivent jamais hériter du span 6 de la grille 16/9 */
 .project-card--reel {
   grid-column: unset;
 }
 
-/* ================= REELS SECTION ================= */
+/* ================= REELS CAROUSEL ================= */
 
 .projects-reels-section {
   margin-top: 72px;
+  overflow: hidden;
 }
 
 .projects-reels-heading {
@@ -281,20 +281,66 @@
   );
 }
 
-/* Grille reels : 4 colonnes pour afficher les formats 9/16 côte à côte */
-.projects-reels-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  align-items: start;
+.projects-reels-carousel {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 6px 0 18px;
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
 }
 
-/* Carte reel : format vertical 9/16 — doit écraser aspect-ratio: 16/10 */
+.projects-reels-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.projects-reels-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: reelsScroll 55s linear infinite;
+  will-change: transform;
+}
+
+.projects-reels-carousel:hover .projects-reels-track {
+  animation-play-state: paused;
+}
+
+.projects-reels-track .project-card--reel {
+  flex: 0 0 clamp(210px, 19vw, 260px);
+}
+
+@keyframes reelsScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 11px));
+  }
+}
+
 .project-card--reel .project-media {
   aspect-ratio: 9 / 16 !important;
   border-radius: 20px;
 }
-
 /* ================= CARD ================= */
 
 .project-media {
@@ -381,7 +427,9 @@
 }
 
 @keyframes fadeInPreview {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ================= SHIMMER ================= */
@@ -457,7 +505,6 @@
     box-shadow 0.24s ease;
 }
 
-/* Play plus petit sur les reels */
 .project-card--reel .project-play {
   width: 44px;
   height: 44px;
@@ -534,7 +581,6 @@
   color: #fff;
 }
 
-/* Titre plus petit sur les reels */
 .project-card--reel .project-title {
   font-size: clamp(14px, 1.2vw, 18px);
   letter-spacing: -0.02em;
@@ -570,7 +616,6 @@
   width: min(1140px, 100%);
 }
 
-/* Lightbox verticale pour les reels */
 .projects-lightbox-inner--reel {
   width: min(420px, 100%);
 }
@@ -655,14 +700,6 @@
   text-transform: uppercase;
 }
 
-.projects-lightbox-info p {
-  margin: 0;
-  max-width: 700px;
-  font-size: 15px;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.72);
-}
-
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 900px) {
@@ -713,8 +750,13 @@
     height: 52px;
   }
 
-  .projects-reels-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .projects-reels-track {
+    gap: 16px;
+    animation-duration: 44s;
+  }
+
+  .projects-reels-track .project-card--reel {
+    flex-basis: clamp(170px, 34vw, 220px);
   }
 }
 
@@ -810,14 +852,52 @@
     font-size: 22px;
   }
 
-  .project-description {
-    font-size: 13px;
-    line-height: 1.65;
+  .projects-reels-section {
+    margin-top: 54px;
   }
 
-  .projects-reels-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .projects-reels-carousel {
+    width: calc(100% + 36px);
+    margin-left: -18px;
+    padding-left: 18px;
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 84%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 84%,
+      transparent 100%
+    );
+  }
+
+  .projects-reels-track {
     gap: 14px;
+    animation-duration: 38s;
+  }
+
+  .projects-reels-track .project-card--reel {
+    flex-basis: 165px;
+  }
+
+  .project-card--reel .project-play {
+    width: 38px;
+    height: 38px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .project-card--reel .project-title {
+    font-size: 13px;
+  }
+
+  .project-card--reel .project-category {
+    min-height: 24px;
+    font-size: 9px;
+    padding: 0 8px;
   }
 
   .projects-lightbox {
@@ -841,11 +921,6 @@
   .projects-lightbox-info h3 {
     font-size: 22px;
   }
-
-  .projects-lightbox-info p {
-    font-size: 14px;
-    line-height: 1.7;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -857,5 +932,9 @@
   .project-play,
   .projects-lightbox-close {
     transition: none !important;
+  }
+
+  .projects-reels-track {
+    animation: none !important;
   }
 }
