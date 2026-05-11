@@ -3,19 +3,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
 import { SpeedInsights } from "@vercel/speed-insights/next";
- 
-const DOMAIN = "https://www.mohamedhenniproduction.com";
- 
+
+const DOMAIN = "https://mohamedhenniproduction.com";
+
 export const metadata = {
   metadataBase: new URL(DOMAIN),
- 
+
   title: {
     default: "Mohamed Henni Production | Vidéaste & Réalisateur Dunkerque",
     template: "%s | Mohamed Henni Production",
   },
   description:
     "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France. Contactez-nous.",
- 
+
   keywords: [
     "vidéaste Dunkerque",
     "production vidéo Dunkerque",
@@ -28,11 +28,11 @@ export const metadata = {
     "MHP production",
     "tournage vidéo Nord-Pas-de-Calais",
   ],
- 
+
   authors: [{ name: "Mohamed Henni", url: DOMAIN }],
   creator: "Mohamed Henni",
   publisher: "Mohamed Henni Production",
- 
+
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -50,7 +50,7 @@ export const metadata = {
       },
     ],
   },
- 
+
   twitter: {
     card: "summary_large_image",
     title: "Mohamed Henni Production | Vidéaste & Réalisateur Dunkerque",
@@ -58,7 +58,7 @@ export const metadata = {
       "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages dans le Nord et partout en France.",
     images: [`${DOMAIN}/og-image.jpg`],
   },
- 
+
   robots: {
     index: true,
     follow: true,
@@ -69,12 +69,12 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
- 
+
   alternates: {
     canonical: DOMAIN,
   },
 };
- 
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -130,7 +130,8 @@ const jsonLd = {
       "@id": `${DOMAIN}/#person`,
       name: "Mohamed Henni",
       jobTitle: "Vidéaste professionnel",
-      description: "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages.",
+      description:
+        "Vidéaste professionnel basé à Dunkerque, spécialisé en productions vidéo pour entreprises, industrie, événementiel et mariages.",
       image: `${DOMAIN}/og-image.jpg`,
       url: DOMAIN,
       worksFor: { "@id": DOMAIN },
@@ -142,7 +143,7 @@ const jsonLd = {
     },
   ],
 };
- 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -157,20 +158,33 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://use.typekit.net/dtz1fkj.css" />
 
         {/* ── Favicons ── */}
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96x96.png"
+          sizes="96x96"
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
+
       <body suppressHydrationWarning>
         {/* Schema.org JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
         <Navbar />
+
         <main style={{ paddingTop: "80px" }}>{children}</main>
+
         <ScrollTop />
         <Footer />
         <SpeedInsights />
