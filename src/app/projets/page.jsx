@@ -18,16 +18,6 @@ const PROJECTS = [
     videoId: "b22aef93e3b6ecb2fdabcb71bfcc45d7",
   },
   {
-    title: "Oneman Confshow - Wayta",
-    category: "Artistique & Événement",
-    videoId: "710f90400fcafb2b9e1ccc1b248390e9",
-  },
-  {
-    title: "AETE 2024",
-    category: "Artistique & Événement",
-    videoId: "3173eef0eed308ea59404d26bf5d4f6f",
-  },
-  {
     title: "SPOT CINEMA MHP X WAYTA",
     category: "Artistique & Événement",
     videoId: "3e9b2cf49d44b7a83a4aead7d6103e24",
