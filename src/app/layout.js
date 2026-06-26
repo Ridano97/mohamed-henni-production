@@ -3,8 +3,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 const DOMAIN = "https://mohamedhenniproduction.com";
+const GTM_ID = "GTM-NK2PMXXB";
 
 export const metadata = {
   metadataBase: new URL(DOMAIN),
@@ -148,6 +150,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <head>
+        {/* Google Tag Manager */}
+        <Script
+          id="google-tag-manager"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `,
+          }}
+        />
+        {/* End Google Tag Manager */}
+
         {/* ── Preconnect Typekit & Cloudflare ── */}
         <link rel="preconnect" href="https://use.typekit.net" />
         <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
@@ -175,6 +193,17 @@ export default function RootLayout({ children }) {
       </head>
 
       <body suppressHydrationWarning>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
+
         {/* Schema.org JSON-LD */}
         <script
           type="application/ld+json"

@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
@@ -26,7 +28,7 @@ const nextConfig = {
   },
 
   turbopack: {
-    root: new URL('.', import.meta.url).pathname,
+    root: fileURLToPath(new URL(".", import.meta.url)),
   },
 
   images: {
