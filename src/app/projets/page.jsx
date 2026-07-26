@@ -159,6 +159,16 @@ const PROJECTS = [
     poster: "/posters/oa8.jpg",
   },
   {
+    title: "LA FAÇONNERIE",
+    category: "Industrie",
+    videoId: "5a1b6e080990fe652f3c13388765e3ed",
+  },
+  {
+    title: "MIP - ÉCLUSE CHARLES DE GAULE",
+    category: "Industrie",
+    videoId: "b4dfd1fb28ec3c7fcf7ae447966acb85",
+  },
+  {
     title: "SPIE BATIGNOLLES",
     category: "Industrie",
     videoId: "2d4fce9f71c84b8223284d70178f775b",
